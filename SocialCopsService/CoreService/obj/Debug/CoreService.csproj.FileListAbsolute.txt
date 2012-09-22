@@ -1,0 +1,9 @@
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\CoreService\bin\CoreService.dll
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\CoreService\bin\CoreService.pdb
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\CoreService\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\CoreService\bin\Microsoft.WindowsAzure.Diagnostics.dll
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\CoreService\bin\Microsoft.WindowsAzure.StorageClient.dll
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\CoreService\bin\Microsoft.WindowsAzure.Diagnostics.xml
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\CoreService\obj\Debug\CoreService.csprojResolveAssemblyReference.cache
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\CoreService\obj\Debug\CoreService.dll
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\CoreService\obj\Debug\CoreService.pdb
