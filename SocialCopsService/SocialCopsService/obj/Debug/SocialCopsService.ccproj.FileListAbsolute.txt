@@ -5,3 +5,4 @@ C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\SocialCopsServic
 C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\SocialCopsService\obj\Debug\CoreService\bin\Microsoft.WindowsAzure.Diagnostics.dll
 C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\SocialCopsService\obj\Debug\CoreService\bin\Microsoft.WindowsAzure.Diagnostics.xml
 C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService\SocialCopsService\obj\Debug\CoreService\bin\Microsoft.WindowsAzure.StorageClient.dll
+C:\Users\y0900_000\Documents\socialCopsDev\SocialCopsService\SocialCopsService\bin\Debug\ServiceConfiguration.cscfg
