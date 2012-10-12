@@ -1,0 +1,6 @@
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService TestClient\ConsoleTest\ConsoleTest\obj\Debug\ConsoleTest.csprojResolveAssemblyReference.cache
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService TestClient\ConsoleTest\ConsoleTest\bin\Debug\ConsoleTest.exe.config
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService TestClient\ConsoleTest\ConsoleTest\bin\Debug\ConsoleTest.exe
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService TestClient\ConsoleTest\ConsoleTest\bin\Debug\ConsoleTest.pdb
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService TestClient\ConsoleTest\ConsoleTest\obj\Debug\ConsoleTest.exe
+C:\Users\Varun\Documents\GitHub\socialCopsDev\SocialCopsService TestClient\ConsoleTest\ConsoleTest\obj\Debug\ConsoleTest.pdb
