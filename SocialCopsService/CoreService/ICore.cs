@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreService.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Security;
@@ -17,6 +18,19 @@ namespace CoreService
         [OperationContract]
         [FaultContract(typeof(Error_Handling.Bug))]
         bool TestConnection();
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "POST", UriTemplate = "SaveUser",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        bool SaveUser(userItem user);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "POST", UriTemplate = "ThirdPartyLogin",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        bool ThirdPartyLogin(userItem user);
+
        
     }
 

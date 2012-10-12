@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f1cfd12985594b6aade23a8cb5b931e4" Name="Diagram1" ZoomLevel="84">
+        <EntityTypeShape EntityType="SocialCopsModel.Authority" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialCopsModel.Comment" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialCopsModel.Complaint" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialCopsModel.Jurisdiction" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialCopsModel.Like" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialCopsModel.Spam" Width="1.5" PointX="8.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialCopsModel.Subscription" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialCopsModel.User" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="SocialCopsModel.FK__Jurisdict__authI__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialCopsModel.FK__Comments__compla__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialCopsModel.FK__Comments__userId__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialCopsModel.FK__Complaint__userI__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialCopsModel.FK__Jurisdict__compl__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialCopsModel.FK__Likes__complaint__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialCopsModel.FK__Spam__complaintI__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialCopsModel.FK__Likes__userId__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialCopsModel.FK__Spam__userId__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialCopsModel.FK__Subscript__subsc__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialCopsModel.FK__Subscript__subsc__2D27B809" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

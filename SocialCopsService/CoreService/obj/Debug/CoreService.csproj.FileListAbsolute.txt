@@ -13,6 +13,7 @@ C:\Users\y0900_000\Documents\socialCopsDev\SocialCopsService\CoreService\bin\Mic
 C:\Users\y0900_000\Documents\socialCopsDev\SocialCopsService\CoreService\bin\Microsoft.WindowsAzure.Diagnostics.dll
 C:\Users\y0900_000\Documents\socialCopsDev\SocialCopsService\CoreService\bin\Microsoft.WindowsAzure.StorageClient.dll
 C:\Users\y0900_000\Documents\socialCopsDev\SocialCopsService\CoreService\bin\Microsoft.WindowsAzure.Diagnostics.xml
-C:\Users\y0900_000\Documents\socialCopsDev\SocialCopsService\CoreService\obj\Debug\CoreService.csprojResolveAssemblyReference.cache
 C:\Users\y0900_000\Documents\socialCopsDev\SocialCopsService\CoreService\obj\Debug\CoreService.dll
 C:\Users\y0900_000\Documents\socialCopsDev\SocialCopsService\CoreService\obj\Debug\CoreService.pdb
+C:\Users\y0900_000\Documents\socialCopsDev\SocialCopsService\CoreService\bin\EntityFramework.dll
+C:\Users\y0900_000\Documents\socialCopsDev\SocialCopsService\CoreService\bin\EntityFramework.xml
