@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreService.Error_Handling;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,22 +13,31 @@ namespace CoreService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : ICore
     {
-        public string GetData(int value)
+        Bug error = new Bug();
+        Logger logger = new Logger();
+        public  bool TestConnection()
         {
-            return string.Format("You entered: {0}", value);
+            
+            try
+            {
+                logger.LogMethod("varun", "TestConnection", "Enter Method", null);
+
+                logger.LogMethod("varun", "TestConnection", "Exit Method", null);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                error.Result = false;
+                error.ErrorMessage = "unforeseen error occured. Please try later.";
+                error.ErrorDetails = ex.ToString();
+                throw new FaultException<Bug>(error, ex.ToString());
+            } 
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
-        }
+
+
+        
+        
+
     }
 }
