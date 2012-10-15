@@ -1,4 +1,5 @@
-﻿using CoreService.Error_Handling;
+﻿using CoreService.Controllers;
+using CoreService.Error_Handling;
 using CoreService.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace CoreService
     {
         Bug error = new Bug();
         Logger logger = new Logger();
-        socialcopsentity context;
+        UserController uc;
+        ComplaintController cc;
 
         #region TestConnection
         public  bool TestConnection()
@@ -42,96 +44,84 @@ namespace CoreService
         #region SaveUser
         public bool SaveUser(userItem user)
         {
-            try
-            {
-                logger.LogMethod("jo", "SaveUser", "Enter", null);
-                context = new socialcopsentity();
-                User temp = new User();
-
-                List<User> users = (from u
-                                    in context.Users
-                                    where u.email == user.email
-                                    select u).ToList();
-
-                if (users.Count > 0)
-                {
-                    logger.LogMethod("jo", "SaveUser", "Invalid Sign-up. Email address already exists.");
-                    error.Result = false;
-                    error.ErrorMessage = "Email address already exists. Cannot register again.";
-                    throw new FaultException<Bug>(error);
-                }
-
-                temp.userName = user.userName;
-                temp.email = user.email;
-                temp.phone = user.phone.ToString();
-                temp.phoneURI = user.phoneUri;
-                temp.profilePic = user.profilePic;
-                temp.userAddress = user.userAddress;
-                temp.points = 0;
-                temp.webURI = user.webUri;
-                temp.pwd = user.pwd;
-                temp.date = System.DateTime.Now;
-                context.Users.Add(temp);
-                context.SaveChanges();
-                logger.LogMethod("jo", "SaveUser", "Exit", null);
-                return true;
-            }
-            catch(Exception ex)
-            {
-                error.Result = false;
-                error.ErrorMessage = "unforeseen error occured. Please try later.";
-                error.ErrorDetails = ex.ToString();
-                throw new FaultException<Bug>(error, ex.ToString());
-            } 
+            uc = new UserController();
+            bool result = uc.SaveUser(user);
+            return result;
 
         }
-#endregion
-
-        #region thirdPartyLogin
-        public bool thirdPartyLogin(userItem user)
-        {
-            try
-            {
-                logger.LogMethod("jo", "FBLogin", "Enter");
-                context = new socialcopsentity();
-                List<User> users = (from u
-                                    in context.Users
-                                    where u.email == user.email
-                                    select u).ToList();
-                if (users.Count == 0)
-                {
-                    logger.LogMethod("jo", "FBLogin", "New user");
-                    User temp = new User();
-                    temp.userName = user.userName;
-                    temp.email = user.email;
-                    temp.phoneURI = user.phoneUri;
-                    temp.date = System.DateTime.Now;
-                    temp.phone = user.phone.ToString();
-                    temp.points = 0;
-                    temp.profilePic = user.profilePic;
-                    temp.userAddress = user.userAddress;
-                    context.Users.Add(temp);
-                    context.SaveChanges();
-                }
-
-                logger.LogMethod("jo", "FBLogin", "Exit");
-                return true;
-            }
-            catch(Exception ex)
-            {
-                error.Result = false;
-                error.ErrorMessage = "unforeseen error occured. Please try later.";
-                error.ErrorDetails = ex.ToString();
-                throw new FaultException<Bug>(error, ex.ToString());
-            }
         #endregion
 
+        #region thirdPartyLogin
+        public bool ThirdPartyLogin(userItem user)
+        {
+            uc = new UserController();
+            bool result = uc.thirdPartyLogin(user);
+            return result;
         }
+        #endregion
 
+        #region SaveComplaint
+        public int SaveComplaint(complaintItem complaint)
+        {
+            cc = new ComplaintController();
+            int result = cc.SaveComplaint(complaint);
+            return result;
+        }
+        #endregion 
 
+        #region GetComplaints
+        public complaintItem[] GetComplaints()
+        {
+            cc = new ComplaintController();
+            complaintItem[] result = cc.GetComplaints();
+            return result;
+            
+        }
+        #endregion
 
-        
-        
+        #region GetComplaints/{id}
+        public complaintItem GetComplaintsById(string id)
+        {
+            cc = new ComplaintController();
+            //complaintItem result = cc.GetComplaints(id);
+            return null;
+        }
+        #endregion
 
+        #region GetComplaintsByCategory/{category}
+        public complaintItem[] GetComplaintsByCategory(string category)
+        {
+            cc = new ComplaintController();
+            complaintItem[] result = cc.GetComplaintsByCategory(category);
+            return result;
+        }
+        #endregion
+
+        #region GetComplaintsByStatus/{complaintStatus}
+        public complaintItem[] GetComplaintsByStatus(string complaintStatus)
+        {
+            cc = new ComplaintController();
+            complaintItem[] result = cc.GetComplaintsByStatus(complaintStatus);
+            return result;
+        }
+        #endregion
+
+        #region GetComplaintsByUserId/{userId}
+        public complaintItem[] GetComplaintsByUserId(string userId)
+        {
+            cc = new ComplaintController();
+            //complaintItem[] result = cc.GetComplaintsByUserId(userId);
+            return null;
+        }
+        #endregion
+
+        #region GetComplaintsByAuthId/{authId}
+        public complaintItem[] GetComplaintsByAuthId(string authId)
+        {
+            cc = new ComplaintController();
+            //complaintItem[] result = cc.GetComplaintsByAuthId(authId);
+            return null;
+        }
+        #endregion
     }
 }
