@@ -7,7 +7,7 @@ namespace CoreService.Cache
 {
     public class Cache
     {
-        public void AddToCache(object key, object temp)
+        public static void AddToCache(object key, object temp)
         {
             if (CachingConfig.CachingEnabled)
             {

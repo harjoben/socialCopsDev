@@ -18,7 +18,7 @@ namespace CoreService.Controllers
         string key;
 
         #region SaveComplaint
-        public int SaveComplaint(complaintItem complaint)
+        public bool SaveComplaint(complaintItem complaint)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace CoreService.Controllers
                 context.Complaints.Add(temp);
                 context.SaveChanges();
                 logger.LogMethod("jo", "SaveUser", "Exit", null);
-                return complaint.complaintId;
+                return true;
             }
             catch (Exception ex)
             {
@@ -83,7 +83,7 @@ namespace CoreService.Controllers
                 List<Complaint> complaints = (from c
                                               in context.Complaints
                                               orderby c.complaintDate descending
-                                              select c).Take(50).ToList();
+                                              select c).ToList();
 
                 foreach (Complaint temp in complaints)
                 {
@@ -121,70 +121,72 @@ namespace CoreService.Controllers
         }
         #endregion
 
-        #region GetComplaints/{id}
-        //public complaintItem GetComplaints(string id)
-        //{
-        //    complaintItem temp = new complaintItem();
-           
-        //    key = id.ToString() + "GetComplaints";
-        //    try
-        //    {
-               
-        //        logger.LogMethod("jo", "GetComplaints/{id}", "Enter");
-        //        context = new socialcopsentity();
-        //        if (CachingConfig.CachingEnabled)
-        //        {
-        //            temp = (complaintItem)WCFCache.Current[key];
-        //            if (temp != null)
-        //            {
-        //                logger.LogMethod("jo", "GetComplaints/{id}", "Cache found");
-        //                return temp;
-        //            }
-        //        }
-        //        List<Complaint> complaints = (from c
-        //                                      in context.Complaints
-        //                                      where c.complaintId == id
-        //                                      select c).ToList();
-        //        if (complaints.Count == 0)
-        //        {
-        //            error.Result = false;
-        //            error.ErrorMessage = "Invalid request. There is no complaint of the given id.";
-        //            logger.LogMethod("jo", "GetComplaints/{id}", "Invalid request. There is no complaint of the given id.");
-        //            throw new FaultException<Bug>(error);                  
-        //        }
+        #region GetComplaintsById/{id}
+        public complaintItem GetComplaintsById(string id)
+        {
+            complaintItem temp = new complaintItem();
 
-        //        temp = new complaintItem();
-        //        foreach (Complaint complaint in complaints)
-        //        {
-        //            temp.complaintId = complaint.complaintId;
-        //            temp.userId = complaint.userId;
-        //            temp.title = complaint.title;
-        //            temp.details = complaint.details;
-        //            temp.numLikes = (int)complaint.numLikes;
-        //            temp.numComments = (int)complaint.numComments;
-        //            temp.picture = complaint.picture;
-        //            temp.complaintDate = (DateTime)complaint.complaintDate;
-        //            temp.location = complaint.location;
-        //            temp.latitude = (float)complaint.latitude;
-        //            temp.longitude = (float)complaint.longitude;
-        //            temp.category = complaint.category;
-        //            temp.complaintStatus = complaint.complaintStatus;
-        //            temp.date = complaint.date;
-        //            temp.isAnonymous = complaint.isAnonymous;
-        //        }
+            key = id + "GetComplaints";
+            try
+            {
 
-        //        Cache.Cache.AddToCache(key, temp);
-        //        logger.LogMethod("jo", "GetComplaints/{id}", "Exit");
-        //        return temp;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        error.Result = false;
-        //        error.ErrorMessage = "unforeseen error occured. Please try again later";
-        //        logger.LogMethod("jo", "GetComplaints/{id}", ex.Message);
-        //        throw new FaultException<Bug>(error, ex.ToString());
-        //    }
-        //}
+                logger.LogMethod("jo", "GetComplaints/{id}", "Enter");
+                context = new socialcopsentity();
+                if (CachingConfig.CachingEnabled)
+                {
+                    temp = (complaintItem)WCFCache.Current[key];
+                    if (temp != null)
+                    {
+                        logger.LogMethod("jo", "GetComplaints/{id}", "Cache found");
+                        return temp;
+                    }
+                }
+                int cId = Convert.ToInt32(id);
+
+                List<Complaint> complaints = (from c
+                                              in context.Complaints
+                                              where c.complaintId == cId
+                                              select c).ToList();
+                if (complaints.Count == 0)
+                {
+                    error.Result = false;
+                    error.ErrorMessage = "Invalid request. There is no complaint of the given id.";
+                    logger.LogMethod("jo", "GetComplaints/{id}", "Invalid request. There is no complaint of the given id.");
+                    throw new FaultException<Bug>(error);
+                }
+
+                temp = new complaintItem();
+                foreach (Complaint complaint in complaints)
+                {
+                    temp.complaintId = complaint.complaintId;
+                    temp.userId = complaint.userId;
+                    temp.title = complaint.title;
+                    temp.details = complaint.details;
+                    temp.numLikes = (int)complaint.numLikes;
+                    temp.numComments = (int)complaint.numComments;
+                    temp.picture = complaint.picture;
+                    temp.complaintDate = (DateTime)complaint.complaintDate;
+                    temp.location = complaint.location;
+                    temp.latitude = (float)complaint.latitude;
+                    temp.longitude = (float)complaint.longitude;
+                    temp.category = complaint.category;
+                    temp.complaintStatus = complaint.complaintStatus;
+                    temp.date = complaint.date;
+                    temp.isAnonymous = complaint.isAnonymous;
+                }
+
+                Cache.Cache.AddToCache(key, temp);
+                logger.LogMethod("jo", "GetComplaints/{id}", "Exit");
+                return temp;
+            }
+            catch (Exception ex)
+            {
+                error.Result = false;
+                error.ErrorMessage = "unforeseen error occured. Please try again later";
+                logger.LogMethod("jo", "GetComplaints/{id}", ex.Message);
+                throw new FaultException<Bug>(error, ex.ToString());
+            }
+        }
         #endregion
 
         #region GetComplaintsByCategory/{category}
@@ -214,7 +216,7 @@ namespace CoreService.Controllers
                                               in context.Complaints
                                               where c.category == category
                                               orderby c.complaintDate descending
-                                              select c).Take(50).ToList();
+                                              select c).ToList();
 
                 foreach (Complaint temp in complaints)
                 {
@@ -278,7 +280,7 @@ namespace CoreService.Controllers
                                               in context.Complaints
                                               where c.complaintStatus == complaintStatus
                                               orderby c.complaintDate descending
-                                              select c).Take(50).ToList();
+                                              select c).ToList();
 
                 foreach (Complaint temp in complaints)
                 {
@@ -316,104 +318,236 @@ namespace CoreService.Controllers
         }
         #endregion
 
-        #region GetComplaintsByUserId/{userId}
-        public complaintItem[] GetComplaintsByUserId(int userId)
+        #region GetComments/{complaintId}
+        public commentItem[] GetComments(String complaintId)
         {
             try
             {
-                logger.LogMethod("jo", "GetComplaintsByUserId", "Enter");
-                key = userId.ToString() + "GetComplaintsByUserId";
-                List<complaintItem> list = new List<complaintItem>();
-                context = new socialcopsentity();
-
-                //Checking if the complaints exist in cache
-                //retrieveing complaints if they do.
+                logger.LogMethod("jo", "GetComments", "Enter");
+                List<commentItem> list = new List<commentItem>();
+                key = complaintId + "GetComments";
                 if (CachingConfig.CachingEnabled)
                 {
-                    list = (List<complaintItem>)WCFCache.Current[key];
+                    list = (List<commentItem>)WCFCache.Current[key];
                     if (list != null)
                     {
-                        logger.LogMethod("jo", "GetComplaintsByUserId", "Cache Found");
+                        logger.LogMethod("jo", "GetComments", "Cache found");
                         return list.ToArray();
                     }
                 }
 
-                List<Complaint> complaints = (from c
-                                              in context.Complaints
-                                              where c.userId == userId
-                                              orderby c.complaintDate descending
-                                              select c).Take(50).ToList();
+                context = new socialcopsentity();
+                int cid = Convert.ToInt32(complaintId);
+                List<Comment> comments = (from c
+                                          in context.Comments
+                                          where c.complaintId == cid
+                                          orderby c.date descending
+                                          select c).ToList();
 
-                foreach (Complaint temp in complaints)
+                foreach(Comment comment in comments)
                 {
-                    complaintItem complaint = new complaintItem();
-                    complaint.complaintId = temp.complaintId;
-                    complaint.userId = temp.userId;
-                    complaint.title = temp.title;
-                    complaint.details = temp.details;
-                    complaint.numLikes = (int)temp.numLikes;
-                    complaint.numComments = (int)temp.numComments;
-                    complaint.picture = temp.picture;
-                    complaint.complaintDate = (DateTime)temp.complaintDate;
-                    complaint.location = temp.location;
-                    complaint.latitude = (float)temp.latitude;
-                    complaint.longitude = (float)temp.longitude;
-                    complaint.category = temp.category;
-                    complaint.complaintStatus = temp.complaintStatus;
-                    complaint.date = temp.date;
-                    complaint.isAnonymous = temp.isAnonymous;
-
-                    list.Add(complaint);
+                    commentItem temp = new commentItem();
+                    temp.comment = comment.comment1;
+                    temp.complaintId = comment.complaintId;
+                    temp.userId = comment.userId;
+                    temp.date = comment.date;
+                    list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, list);
-                logger.LogMethod("jo", "GetComplaintsByUserId", "Exit");
+                logger.LogMethod("jo", "GetComments", "Exit");
+                return list.ToArray();
+            }
+            catch (Exception ex)
+            {
+                error.Result = false;
+                error.ErrorMessage = "Something happened. Sorry";
+                logger.LogMethod("jo", "GetComments", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
+            }
+            
+        }
+        #endregion
+
+        #region GetLikes/{complaintId}
+        public likeItem[] GetLikes(String complaintId)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetLikes", "Enter");
+                List<likeItem> list = new List<likeItem>();
+                key = complaintId + "GetLikes";
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<likeItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetLikes", "Cache found");
+                        return list.ToArray();
+                    }
+                }
+
+                context = new socialcopsentity();
+                int cid = Convert.ToInt32(complaintId);
+                List<Like> likes = (from c
+                                          in context.Likes
+                                          where c.complaintId == cid
+                                          orderby c.date descending
+                                          select c).ToList();
+
+                foreach(Like like in likes)
+                {
+                    likeItem temp = new likeItem();
+                    temp.complaintId = like.complaintId;
+                    temp.date = like.date;
+                    temp.userId = like.userId;
+                    list.Add(temp);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetLikes", "Exit");
+                return list.ToArray();
+            }
+            catch (Exception ex)
+            {
+                error.Result = false;
+                error.ErrorMessage = "Something happened. Sorry";
+                logger.LogMethod("jo", "GetLikes", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
+            }
+            
+        }
+        #endregion
+
+        #region SaveComment
+        public bool SaveComment(commentItem comment)
+        {
+            try
+            {
+                logger.LogMethod("jo", "SaveComment", "Enter");
+                context = new socialcopsentity();
+                Comment temp = new Comment();
+                temp.comment1 = comment.comment;
+                temp.complaintId = comment.complaintId;
+                temp.userId = comment.userId;
+                temp.date = System.DateTime.Now;
+                context.Comments.Add(temp);
+                context.SaveChanges();
+                logger.LogMethod("jo", "SaveComment", "Exit");
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                error.ErrorMessage = "Something happened. Sorry.";
+                error.Result = false;
+                logger.LogMethod("jo", "SaveComment", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
+            }
+        }
+        #endregion
+
+        #region SaveLike
+        public bool SaveLike(likeItem like)
+        {
+            try
+            {
+                logger.LogMethod("jo", "SaveLike", "Enter");
+                context = new socialcopsentity();
+                Like temp = new Like();
+                temp.complaintId = like.complaintId;
+                temp.userId = like.userId;
+                temp.date = like.date;
+                context.Likes.Add(temp);
+                context.SaveChanges();
+                logger.LogMethod("jo", "SaveLike", "Exit");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                error.Result = false;
+                error.ErrorMessage = "Something happened. Sorry.";
+                logger.LogMethod("jo", "SaveLike", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
+            }
+        }
+        #endregion
+
+        #region GetSpam/{complaintId}
+        public spamItem[] GetSpam(string complaintId)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetSpam", "Enter");
+
+                List<spamItem> list = new List<spamItem>();
+                key = complaintId + "GetSpam";
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<spamItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetSpam", "Cache found");
+                        return list.ToArray();
+                    }
+                }
+
+                context = new socialcopsentity();
+                //Retrieving records from the database
+                int cid = Convert.ToInt32(complaintId);
+                List<Spam> spams = (from s
+                                    in context.Spams
+                                    where s.complaintId == cid
+                                    orderby s.date descending
+                                    select s).ToList();
+
+                foreach (Spam spam in spams)
+                {
+                    spamItem temp = new spamItem();
+                    temp.complaintId = spam.complaintId;
+                    temp.userId = spam.userId;
+                    temp.date = spam.date;
+                    list.Add(temp);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetSpam", "Exit");
                 return list.ToArray();
 
             }
             catch (Exception ex)
             {
-                error.Result = false;
-                error.ErrorMessage = "unforeseen error occured. Please try later.";
+                error.ErrorMessage = "Something happened. Sorry.";
                 error.ErrorDetails = ex.ToString();
-                throw new FaultException<Bug>(error, ex.ToString());
+                error.Result = false;
+                logger.LogMethod("jo", "GetSpam", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
             }
         }
         #endregion
 
-        #region GetComplaintsByAuthId/{authId}
-        public complaintItem[] GetComplaintsByAuthId(int authId)
+        #region SaveSpam
+        public bool SaveSpam(spamItem spam)
         {
             try
             {
-                logger.LogMethod("jo", "GetComplaintsByAuthId", "Enter");
-                List<complaintItem> list = new List<complaintItem>();
-                key = authId.ToString() + "GetComplaintsByAuthId";
-                if (CachingConfig.CachingEnabled)
-                {
-                    list = (List<complaintItem>)WCFCache.Current[key];
-                    if (list != null)
-                    {
-                        logger.LogMethod("jo", "GetComplaintsbyAuthId", "Cache found");
-                        return list.ToArray();
-                    }
-                }
-
-                //Getting the complaintIds from jurisdiction table where id is authId
-                List<Jurisdiction> complaintIds = (from c
-                                                   in context.Jurisdictions
-                                                   where c.authId == authId
-                                                   select c).ToList();
-                return null;
+                logger.LogMethod("jo", "SaveSpam", "Enter");
+                context = new socialcopsentity();
+                Spam temp = new Spam();
+                temp.date = spam.date;
+                temp.complaintId = spam.complaintId;
+                temp.userId = spam.userId;
+                context.Spams.Add(temp);
+                context.SaveChanges();
+                logger.LogMethod("jo", "SaveSpam", "Exit");
+                return true;
             }
             catch (Exception ex)
             {
-                error.ErrorMessage = "An error occurred. Sorry!";
-                error.Result = true;
-                logger.LogMethod("jo", "GetComplaintsByAuthId", ex.Message);
-                throw new FaultException<Bug>(error, ex.Message);
+                error.Result = false;
+                error.ErrorMessage = "Something happened. Sorry.";
+                error.ErrorDetails = ex.ToString();
+                logger.LogMethod("jo", "SaveSpam", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
             }
         }
         #endregion
-
     }
 }

@@ -5,8 +5,6 @@ using System.Text;
 using ConsoleTest.CoreService;
 using System.ServiceModel;
 using ConsoleTest.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Net;
 using System.IO;
 using System.Runtime.Serialization.Json;
@@ -30,7 +28,7 @@ namespace ConsoleTest
                 response = client.TestConnection(request);
                 Console.WriteLine("Testing Connection Result : " + response.TestConnectionResult);
                 logger.warning("Exit TestConnection Method");
-                Console.ReadLine();
+               // Console.ReadLine();
                 
             }
             catch (FaultException<Bug> Fex)
@@ -57,15 +55,16 @@ namespace ConsoleTest
             {
                 WebClient client = new WebClient();
                 client.Headers["Content-type"] = "application/json";
-                userItem item = new userItem();
+                ConsoleTest.Models.userItem item = new ConsoleTest.Models.userItem();
                 item.userName = "Varun Banka";
                 item.userAddress = "scdscscsdac";
-                item.email = "bankavarun@gmail.com";
+                item.email = "bankav@gmail.com";
+                item.date = DateTime.Now;
 
                 MemoryStream stream = new MemoryStream();
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(userItem));
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ConsoleTest.Models.userItem));
                 serializer.WriteObject(stream, item);
-                byte[] data = client.UploadData("http://localhost:11523/Service1.svc/SaveUser", "POST", stream.ToArray());
+                byte[] data = client.UploadData("http://127.0.0.1/Core.svc/SaveUser", "POST", stream.ToArray());
                 stream = new MemoryStream(data);
                 serializer = new DataContractJsonSerializer(typeof(bool));
                 bool result = (bool)serializer.ReadObject(stream);
@@ -97,7 +96,9 @@ namespace ConsoleTest
         {
             Program test = new Program();
             test.logger.start("Social Cops Service Test Client");
-            test.TestConnection();
+           // test.TestConnection();
+            test.SaveUser();
+
         }
     }
 }

@@ -35,7 +35,7 @@ namespace CoreService
         [FaultContract(typeof(Error_Handling.Bug))]
         [WebInvoke(Method = "POST", UriTemplate = "SaveComplaint",
            RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        int SaveComplaint(complaintItem complaint);
+        bool SaveComplaint(complaintItem complaint);
 
         [OperationContract]
         [FaultContract(typeof(Error_Handling.Bug))]
@@ -72,6 +72,163 @@ namespace CoreService
         [WebInvoke(Method = "GET", UriTemplate = "GetComplaintsByAuthId/{authId}",
            RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         complaintItem[] GetComplaintsByAuthId(string authId);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetComments/{complaintId}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        commentItem[] GetComments(string complaintId);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetCommentsByUserId/{userId}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        commentItem[] GetCommentsByUserId(string userId);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetLikes/{complaintId}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        likeItem[] GetLikes(string complaintId);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetLikesByUserId/{userId}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        likeItem[] GetLikesByUserId(string userId);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "POST", UriTemplate = "SaveComment",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        bool SaveComment(commentItem comment);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "POST", UriTemplate = "SaveLike",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        bool SaveLike(likeItem like);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetSpam/{complaintId}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        spamItem[] GetSpam(string complaintId);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetSpamByUserId/{userId}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        spamItem[] GetSpamByUserId(string userId);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "POST", UriTemplate = "SaveSpam",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        bool SaveSpam(spamItem spam);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetUsers",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        userItem[] GetUsers();
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetUserById/{id}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        userItem GetUserById(string id);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetUsersByName/{name}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        userItem[] GetUsersByName(string name);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetUserByEmail/{email}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        userItem GetUserByEmail(string email);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetUsersByPoints/{points}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        userItem[] GetUsersByPoints(string points);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetUsersByRank/{rank}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        userItem[] GetUsersByRank(string rank);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetUsersByComplaints/{num}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        userItem[] GetUsersByComplaints(string num);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "POST", UriTemplate = "SaveSubscription",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        bool SaveSubscription(subscriptionItem subscription);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetSubscribers/{id}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        userItem[] GetSubscribers(string id);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetSubscribedTo/{id}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        userItem[] GetSubscribedTo(string id);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "POST", UriTemplate = "SaveAuth",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        bool SaveAuth(authorityItem auth);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetAuths",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        authorityItem[] GetAuths();
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetAuthById/{id}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        authorityItem GetAuthById(string id);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetAuthsByName/{name}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        authorityItem[] GetAuthsByName(string name);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetAuthByEmail/{email}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        authorityItem GetAuthByEmail(string email);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetAuthsByPending/{num}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        authorityItem[] GetAuthsByPending(string num);
+
+        [OperationContract]
+        [FaultContract(typeof(Error_Handling.Bug))]
+        [WebInvoke(Method = "GET", UriTemplate = "GetAuthsBySolved/{num}",
+           RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        authorityItem[] GetAuthsBySolved(string num);
+
     }
 
 
