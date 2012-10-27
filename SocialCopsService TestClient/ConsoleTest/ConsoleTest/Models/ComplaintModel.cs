@@ -291,6 +291,25 @@ namespace ConsoleTest.Models
         }
         #endregion
 
+        #region ImageByte
+        private byte[] _ImageByte;
+        public byte[] ImageByte
+        {
+            get
+            {
+                return _ImageByte;
+            }
+            set
+            {
+                if (_ImageByte != value)
+                {
+                    _ImageByte = value;
+                    NotifyPropertyChanged("ImageByte");
+                }
+            }
+        }
+        #endregion
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;
