@@ -41,11 +41,58 @@ namespace CoreService.Controllers
                 temp.complaintStatus = complaint.complaintStatus;
                 temp.date = complaint.date;
                 temp.isAnonymous = complaint.isAnonymous;
+                temp.city = complaint.city;
+                temp.state = complaint.state;
+                temp.country = complaint.country;
+                temp.pincode = complaint.pincode;
+                temp.thumbImage1 = complaint.thumbImage1;
+                temp.thumbImage2 = complaint.thumbImage2;
                 
                 context.Complaints.Add(temp);
                 context.SaveChanges();
                 logger.LogMethod("jo", "SaveComplaint", "Exit", null);
                 return temp.complaintId;
+            }
+            catch (Exception ex)
+            {
+                error.Result = false;
+                error.ErrorMessage = "unforeseen error occured. Please try later.";
+                error.ErrorDetails = ex.ToString();
+                throw new FaultException<Bug>(error, ex.ToString());
+            }
+        }
+        #endregion
+
+        #region SaveImage
+        public bool SaveImage(int id, string url, string url1, string url2)
+        {
+            try
+            {
+                logger.LogMethod("jo", "SaveImage", "Enter", null);
+                context = new SocialCopsEntities();
+
+                
+                Complaint temp = new Complaint();
+                temp = (Complaint)(from c
+                                    in context.Complaints
+                                    where c.complaintId == id
+                                    select c);
+
+                if (temp == null)
+                {
+                    error.Result = false;
+                    error.ErrorMessage = "Invalid complaint Id.";
+                    error.ErrorDetails = "The complaint does not exist.";
+                    throw new FaultException<Bug>(error);
+                }
+
+                temp.picture = url;
+                temp.thumbImage1 = url1;
+                temp.thumbImage2 = url2;
+                context.SaveChanges();
+
+                logger.LogMethod("jo", "SaveImage", "Exit", null);
+                return true ;
             }
             catch (Exception ex)
             {
@@ -103,7 +150,12 @@ namespace CoreService.Controllers
                     complaint.complaintStatus = temp.complaintStatus;
                     complaint.date = temp.date;
                     complaint.isAnonymous = temp.isAnonymous;
-
+                    complaint.city = temp.city;
+                    complaint.state = temp.state;
+                    complaint.country = temp.country;
+                    complaint.pincode = temp.pincode;
+                    complaint.thumbImage1 = temp.thumbImage1;
+                    complaint.thumbImage2 = temp.thumbImage2;
                     list.Add(complaint);
                 }
                 Cache.Cache.AddToCache(key, list);
@@ -173,6 +225,12 @@ namespace CoreService.Controllers
                     temp.complaintStatus = complaint.complaintStatus;
                     temp.date = complaint.date;
                     temp.isAnonymous = complaint.isAnonymous;
+                    temp.city = complaint.city;
+                    temp.state = complaint.state;
+                    temp.country = complaint.country;
+                    temp.pincode = complaint.pincode;
+                    temp.thumbImage1 = complaint.thumbImage1;
+                    temp.thumbImage2 = complaint.thumbImage2;
                 }
 
                 Cache.Cache.AddToCache(key, temp);
@@ -236,6 +294,12 @@ namespace CoreService.Controllers
                     complaint.complaintStatus = temp.complaintStatus;
                     complaint.date = temp.date;
                     complaint.isAnonymous = temp.isAnonymous;
+                    complaint.city = temp.city;
+                    complaint.state = temp.state;
+                    complaint.country = temp.country;
+                    complaint.pincode = temp.pincode;
+                    complaint.thumbImage1 = temp.thumbImage1;
+                    complaint.thumbImage2 = temp.thumbImage2;
 
                     list.Add(complaint);
                 }
@@ -300,11 +364,297 @@ namespace CoreService.Controllers
                     complaint.complaintStatus = temp.complaintStatus;
                     complaint.date = temp.date;
                     complaint.isAnonymous = temp.isAnonymous;
+                    complaint.city = temp.city;
+                    complaint.state = temp.state;
+                    complaint.country = temp.country;
+                    complaint.pincode = temp.pincode;
+                    complaint.thumbImage1 = temp.thumbImage1;
+                    complaint.thumbImage2 = temp.thumbImage2;
 
                     list.Add(complaint);
                 }
                 Cache.Cache.AddToCache(key, list);
                 logger.LogMethod("jo", "GetComplaintsByStatus", "Exit");
+                return list.ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                error.Result = false;
+                error.ErrorMessage = "unforeseen error occured. Please try later.";
+                error.ErrorDetails = ex.ToString();
+                throw new FaultException<Bug>(error, ex.ToString());
+            }
+        }
+        #endregion
+
+        #region GetComplaintsByCity/{city}
+        public complaintItem[] GetComplaintsByCity(string city)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetComplaintsByCity", "Enter");
+                key = city + "GetComplaintsByCity";
+                List<complaintItem> list = new List<complaintItem>();
+                context = new SocialCopsEntities();
+
+                //Checking if the complaints exist in cache
+                //retrieveing complaints if they do.
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<complaintItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetComplaintsByCity", "Cache Found");
+                        return list.ToArray();
+                    }
+                }
+
+                List<Complaint> complaints = (from c
+                                              in context.Complaints
+                                              where c.city == city
+                                              orderby c.complaintDate descending
+                                              select c).ToList();
+
+                foreach (Complaint temp in complaints)
+                {
+                    complaintItem complaint = new complaintItem();
+                    complaint.complaintId = temp.complaintId;
+                    complaint.userId = temp.userId;
+                    complaint.title = temp.title;
+                    complaint.details = temp.details;
+                    complaint.numLikes = (int)temp.numLikes;
+                    complaint.numComments = (int)temp.numComments;
+                    complaint.picture = temp.picture;
+                    complaint.complaintDate = (DateTime)temp.complaintDate;
+                    complaint.location = temp.location;
+                    complaint.latitude = (float)temp.latitude;
+                    complaint.longitude = (float)temp.longitude;
+                    complaint.category = temp.category;
+                    complaint.complaintStatus = temp.complaintStatus;
+                    complaint.date = temp.date;
+                    complaint.isAnonymous = temp.isAnonymous;
+                    complaint.city = temp.city;
+                    complaint.state = temp.state;
+                    complaint.country = temp.country;
+                    complaint.pincode = temp.pincode;
+                    complaint.thumbImage1 = temp.thumbImage1;
+                    complaint.thumbImage2 = temp.thumbImage2;
+
+                    list.Add(complaint);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetComplaintsByCity", "Exit");
+                return list.ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                error.Result = false;
+                error.ErrorMessage = "unforeseen error occured. Please try later.";
+                error.ErrorDetails = ex.ToString();
+                throw new FaultException<Bug>(error, ex.ToString());
+            }
+        }
+        #endregion
+
+        #region GetComplaintsByState/{state}
+        public complaintItem[] GetComplaintsByState(string state)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetComplaintsByState", "Enter");
+                key = state + "GetComplaintsByState";
+                List<complaintItem> list = new List<complaintItem>();
+                context = new SocialCopsEntities();
+
+                //Checking if the complaints exist in cache
+                //retrieveing complaints if they do.
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<complaintItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetComplaintsByState", "Cache Found");
+                        return list.ToArray();
+                    }
+                }
+
+                List<Complaint> complaints = (from c
+                                              in context.Complaints
+                                              where c.state == state
+                                              orderby c.complaintDate descending
+                                              select c).ToList();
+
+                foreach (Complaint temp in complaints)
+                {
+                    complaintItem complaint = new complaintItem();
+                    complaint.complaintId = temp.complaintId;
+                    complaint.userId = temp.userId;
+                    complaint.title = temp.title;
+                    complaint.details = temp.details;
+                    complaint.numLikes = (int)temp.numLikes;
+                    complaint.numComments = (int)temp.numComments;
+                    complaint.picture = temp.picture;
+                    complaint.complaintDate = (DateTime)temp.complaintDate;
+                    complaint.location = temp.location;
+                    complaint.latitude = (float)temp.latitude;
+                    complaint.longitude = (float)temp.longitude;
+                    complaint.category = temp.category;
+                    complaint.complaintStatus = temp.complaintStatus;
+                    complaint.date = temp.date;
+                    complaint.isAnonymous = temp.isAnonymous;
+                    complaint.city = temp.city;
+                    complaint.state = temp.state;
+                    complaint.country = temp.country;
+                    complaint.pincode = temp.pincode;
+                    complaint.thumbImage1 = temp.thumbImage1;
+                    complaint.thumbImage2 = temp.thumbImage2;
+
+                    list.Add(complaint);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetComplaintsByState", "Exit");
+                return list.ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                error.Result = false;
+                error.ErrorMessage = "unforeseen error occured. Please try later.";
+                error.ErrorDetails = ex.ToString();
+                throw new FaultException<Bug>(error, ex.ToString());
+            }
+        }
+        #endregion
+
+        #region GetComplaintsByCountry/{country}
+        public complaintItem[] GetComplaintsByCountry(string country)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetComplaintsByCountry", "Enter");
+                key = country + "GetComplaintsByCountry";
+                List<complaintItem> list = new List<complaintItem>();
+                context = new SocialCopsEntities();
+
+                //Checking if the complaints exist in cache
+                //retrieveing complaints if they do.
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<complaintItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetComplaintsByCountry", "Cache Found");
+                        return list.ToArray();
+                    }
+                }
+
+                List<Complaint> complaints = (from c
+                                              in context.Complaints
+                                              where c.country == country
+                                              orderby c.complaintDate descending
+                                              select c).ToList();
+
+                foreach (Complaint temp in complaints)
+                {
+                    complaintItem complaint = new complaintItem();
+                    complaint.complaintId = temp.complaintId;
+                    complaint.userId = temp.userId;
+                    complaint.title = temp.title;
+                    complaint.details = temp.details;
+                    complaint.numLikes = (int)temp.numLikes;
+                    complaint.numComments = (int)temp.numComments;
+                    complaint.picture = temp.picture;
+                    complaint.complaintDate = (DateTime)temp.complaintDate;
+                    complaint.location = temp.location;
+                    complaint.latitude = (float)temp.latitude;
+                    complaint.longitude = (float)temp.longitude;
+                    complaint.category = temp.category;
+                    complaint.complaintStatus = temp.complaintStatus;
+                    complaint.date = temp.date;
+                    complaint.isAnonymous = temp.isAnonymous;
+                    complaint.city = temp.city;
+                    complaint.state = temp.state;
+                    complaint.country = temp.country;
+                    complaint.pincode = temp.pincode;
+                    complaint.thumbImage1 = temp.thumbImage1;
+                    complaint.thumbImage2 = temp.thumbImage2;
+
+                    list.Add(complaint);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetComplaintsByCountry", "Exit");
+                return list.ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                error.Result = false;
+                error.ErrorMessage = "unforeseen error occured. Please try later.";
+                error.ErrorDetails = ex.ToString();
+                throw new FaultException<Bug>(error, ex.ToString());
+            }
+        }
+        #endregion
+
+        #region GetComplaintsByPin/{pin}
+        public complaintItem[] GetComplaintsByPin(string pin)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetComplaintsByPin", "Enter");
+                key = pin + "GetComplaintsByPin";
+                List<complaintItem> list = new List<complaintItem>();
+                context = new SocialCopsEntities();
+
+                //Checking if the complaints exist in cache
+                //retrieveing complaints if they do.
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<complaintItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetComplaintsByPin", "Cache Found");
+                        return list.ToArray();
+                    }
+                }
+
+                List<Complaint> complaints = (from c
+                                              in context.Complaints
+                                              where c.pincode == pin
+                                              orderby c.complaintDate descending
+                                              select c).ToList();
+
+                foreach (Complaint temp in complaints)
+                {
+                    complaintItem complaint = new complaintItem();
+                    complaint.complaintId = temp.complaintId;
+                    complaint.userId = temp.userId;
+                    complaint.title = temp.title;
+                    complaint.details = temp.details;
+                    complaint.numLikes = (int)temp.numLikes;
+                    complaint.numComments = (int)temp.numComments;
+                    complaint.picture = temp.picture;
+                    complaint.complaintDate = (DateTime)temp.complaintDate;
+                    complaint.location = temp.location;
+                    complaint.latitude = (float)temp.latitude;
+                    complaint.longitude = (float)temp.longitude;
+                    complaint.category = temp.category;
+                    complaint.complaintStatus = temp.complaintStatus;
+                    complaint.date = temp.date;
+                    complaint.isAnonymous = temp.isAnonymous;
+                    complaint.city = temp.city;
+                    complaint.state = temp.state;
+                    complaint.country = temp.country;
+                    complaint.pincode = temp.pincode;
+                    complaint.thumbImage1 = temp.thumbImage1;
+                    complaint.thumbImage2 = temp.thumbImage2;
+
+                    list.Add(complaint);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetComplaintsByPin", "Exit");
                 return list.ToArray();
 
             }

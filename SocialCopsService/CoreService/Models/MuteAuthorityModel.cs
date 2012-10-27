@@ -44,20 +44,20 @@ namespace CoreService.Models
         }
         #endregion
 
-        #region MuteAuthAddress
-        private string _MuteAuthAddress;
-        public string MuteAuthAddress
+        #region muteAuthAddress
+        private string _muteAuthAddress;
+        public string muteAuthAddress
         {
             get
             {
-                return _MuteAuthAddress;
+                return _muteAuthAddress;
             }
             set
             {
-                if (_MuteAuthAddress != value)
+                if (_muteAuthAddress != value)
                 {
-                    _MuteAuthAddress = value;
-                    NotifyPropertyChanged("MuteAuthAddress");
+                    _muteAuthAddress = value;
+                    NotifyPropertyChanged("muteAuthAddress");
                 }
             }
         }
@@ -140,8 +140,8 @@ namespace CoreService.Models
         #endregion
 
         #region phone
-        private int _phone;
-        public int phone
+        private string _phone;
+        public string phone
         {
             get
             {

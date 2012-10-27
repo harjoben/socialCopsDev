@@ -151,6 +151,8 @@
           <Property Name="state" Type="varchar" MaxLength="200" />
           <Property Name="country" Type="varchar" MaxLength="200" />
           <Property Name="pincode" Type="varchar" MaxLength="10" />
+          <Property Name="thumbImage1" Type="varchar" MaxLength="500" />
+          <Property Name="thumbImage2" Type="varchar" MaxLength="500" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'socialcops.dbo.Jurisdiction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -498,6 +500,8 @@
           <Property Name="state" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="country" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="pincode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="thumbImage1" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="thumbImage2" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Comments" Relationship="socialcopsModel.FK__Comments__compla__24927208" FromRole="Complaints" ToRole="Comments" />
           <NavigationProperty Name="User" Relationship="socialcopsModel.FK__Complaint__userI__21B6055D" FromRole="Complaints" ToRole="Users" />
           <NavigationProperty Name="Jurisdictions" Relationship="socialcopsModel.FK__Jurisdict__compl__276EDEB3" FromRole="Complaints" ToRole="Jurisdiction" />
@@ -793,6 +797,8 @@
                 <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="pincode" ColumnName="pincode" />
+                <ScalarProperty Name="thumbImage1" ColumnName="thumbImage1" />
+                <ScalarProperty Name="thumbImage2" ColumnName="thumbImage2" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -41,6 +41,8 @@ namespace CoreService
         public string state { get; set; }
         public string country { get; set; }
         public string pincode { get; set; }
+        public string thumbImage1 { get; set; }
+        public string thumbImage2 { get; set; }
     
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual User User { get; set; }

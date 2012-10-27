@@ -20,6 +20,7 @@ namespace CoreService
         UserController uc;
         ComplaintController cc;
         AuthorityController ac;
+        MuteAuthController mc;
 
         #region TestConnection
         public  bool TestConnection()
@@ -52,6 +53,16 @@ namespace CoreService
         }
         #endregion
 
+        #region SaveProfilePic
+        public bool SaveProfilePic(int id, string url)
+        {
+            uc = new UserController();
+            bool result = uc.SaveProfilePic(id, url);
+            return result;
+
+        }
+        #endregion
+
         #region thirdPartyLogin
         public bool ThirdPartyLogin(userItem user)
         {
@@ -69,6 +80,15 @@ namespace CoreService
             return result;
         }
         #endregion 
+
+        #region SaveImage
+        public bool SaveImage(int id, string url, string url1, string url2)
+        {
+            cc = new ComplaintController();
+            bool result = cc.SaveImage(id, url, url1, url2);
+            return result;
+        }
+        #endregion
 
         #region GetComplaints
         public complaintItem[] GetComplaints()
@@ -103,6 +123,42 @@ namespace CoreService
         {
             cc = new ComplaintController();
             complaintItem[] result = cc.GetComplaintsByStatus(complaintStatus);
+            return result;
+        }
+        #endregion
+
+        #region GetComplaintsByCity/{city}
+        public complaintItem[] GetComplaintsByCity(string city)
+        {
+            cc = new ComplaintController();
+            complaintItem[] result = cc.GetComplaintsByCity(city);
+            return result;
+        }
+        #endregion
+
+        #region GetComplaintsByState/{state}
+        public complaintItem[] GetComplaintsByState(string state)
+        {
+            cc = new ComplaintController();
+            complaintItem[] result = cc.GetComplaintsByState(state);
+            return result;
+        }
+        #endregion
+
+        #region GetComplaintsByCountry/{country}
+        public complaintItem[] GetComplaintsByCountry(string country)
+        {
+            cc = new ComplaintController();
+            complaintItem[] result = cc.GetComplaintsByCountry(country);
+            return result;
+        }
+        #endregion
+
+        #region GetComplaintsByPin/{pin}
+        public complaintItem[] GetComplaintsByPin(string pin)
+        {
+            cc = new ComplaintController();
+            complaintItem[] result = cc.GetComplaintsByPin(pin);
             return result;
         }
         #endregion
@@ -260,6 +316,42 @@ namespace CoreService
         }
         #endregion
 
+        #region GetUsersByCity/{city}
+        public userItem[] GetUsersByCity(string city)
+        {
+            uc = new UserController();
+            userItem[] result = uc.GetUsersByCity(city);
+            return result;
+        }
+        #endregion
+
+        #region GetUsersByState/{state}
+        public userItem[] GetUsersByState(string state)
+        {
+            uc = new UserController();
+            userItem[] result = uc.GetUsersByState(state);
+            return result;
+        }
+        #endregion
+
+        #region GetUsersByCountry/{country}
+        public userItem[] GetUsersByCountry(string country)
+        {
+            uc = new UserController();
+            userItem[] result = uc.GetUsersByCountry(country);
+            return result;
+        }
+        #endregion
+
+        #region GetUsersByPin/{pin}
+        public userItem[] GetUsersByPin(string pin)
+        {
+            uc = new UserController();
+            userItem[] result = uc.GetUsersByPin(pin);
+            return result;
+        }
+        #endregion
+
         #region GetUsersByComplaints/{num}
         public userItem[] GetUsersByComplaints(string num)
         {
@@ -296,15 +388,6 @@ namespace CoreService
         }
         #endregion
 
-        #region SaveAuth
-        public bool SaveAuth(authorityItem auth)
-        {
-            ac = new AuthorityController();
-            bool result = ac.SaveAuth(auth);
-            return result;
-        }
-        #endregion
-
         #region GetAuths
         public authorityItem[] GetAuths()
         {
@@ -332,6 +415,42 @@ namespace CoreService
         }
         #endregion
 
+        #region GetAuthsByCity/{city}
+        public authorityItem[] GetAuthsByCity(string city)
+        {
+            ac = new AuthorityController();
+            authorityItem[] result = ac.GetAuthsByCity(city);
+            return result;
+        }
+        #endregion
+
+        #region GetAuthsByState/{state}
+        public authorityItem[] GetAuthsByState(string state)
+        {
+            ac = new AuthorityController();
+            authorityItem[] result = ac.GetAuthsByState(state);
+            return result;
+        }
+        #endregion
+
+        #region GetAuthsByCountry/{country}
+        public authorityItem[] GetAuthsByCountry(string country)
+        {
+            ac = new AuthorityController();
+            authorityItem[] result = ac.GetAuthsByCountry(country);
+            return result;
+        }
+        #endregion
+
+        #region GetAuthsByPin/{pin}
+        public authorityItem[] GetAuthsByPin(string pin)
+        {
+            ac = new AuthorityController();
+            authorityItem[] result = ac.GetAuthsByPin(pin);
+            return result;
+        }
+        #endregion
+
         #region GetAuthByEmail/{email}
         public authorityItem GetAuthByEmail(string email)
         {
@@ -355,6 +474,87 @@ namespace CoreService
         {
             ac = new AuthorityController();
             authorityItem[] result = ac.GetAuthsBySolved(num);
+            return result;
+        }
+        #endregion
+
+        #region SaveMuteAuth
+        public int SaveMuteAuth(muteAuthorityItem muteAuth)
+        {
+            mc = new MuteAuthController();
+            int result = mc.SaveMuteAuth(muteAuth);
+            return result;
+        }
+        #endregion
+
+        #region GetMuteAuths
+        public muteAuthorityItem[] GetMuteAuths()
+        {
+            mc = new MuteAuthController();
+            muteAuthorityItem[] result = mc.GetMuteAuths();
+            return result;
+        }
+        #endregion
+
+        #region GetMuteAuthsById/{id}
+        public muteAuthorityItem[] GetMuteAuthsById(string id)
+        {
+            mc = new MuteAuthController();
+            muteAuthorityItem[] result = mc.GetMuteAuthsById(id);
+            return result;
+        }
+        #endregion
+
+        #region GetMuteAuthsByName/{name}
+        public muteAuthorityItem[] GetMuteAuthsByName(string name)
+        {
+            mc = new MuteAuthController();
+            muteAuthorityItem[] result = mc.GetMuteAuthsByName(name);
+            return result;
+        }
+        #endregion
+
+        #region GetMuteAuthsByCity/{city}
+        public muteAuthorityItem[] GetMuteAuthsByCity(string city)
+        {
+            mc = new MuteAuthController();
+            muteAuthorityItem[] result = mc.GetMuteAuthsByCity(city);
+            return result;
+        }
+        #endregion
+
+        #region GetMuteAuthsByState/{state}
+        public muteAuthorityItem[] GetMuteAuthsByState(string state)
+        {
+            mc = new MuteAuthController();
+            muteAuthorityItem[] result = mc.GetMuteAuthsByState(state);
+            return result;
+        }
+        #endregion
+
+        #region GetMuteAuthsByCountry/{country}
+        public muteAuthorityItem[] GetMuteAuthsByCountry(string country)
+        {
+            mc = new MuteAuthController();
+            muteAuthorityItem[] result = mc.GetMuteAuthsByCountry(country);
+            return result;
+        }
+        #endregion
+
+        #region GetMuteAuthsByEmail/{email}
+        public muteAuthorityItem[] GetMuteAuthsByEmail(string email)
+        {
+            mc = new MuteAuthController();
+            muteAuthorityItem[] result = mc.GetMuteAuthsByEmail(email);
+            return result;
+        }
+        #endregion
+
+        #region GetMuteAuthsByPin/{pin}
+        public muteAuthorityItem[] GetMuteAuthsByPin(string pin)
+        {
+            mc = new MuteAuthController();
+            muteAuthorityItem[] result = mc.GetMuteAuthsByPin(pin);
             return result;
         }
         #endregion
