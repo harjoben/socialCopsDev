@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.Web;
 using System.Configuration;
 using CoreService.Cache;
+using System.IO;
 
 namespace CoreService.Controllers
 {
@@ -41,7 +42,12 @@ namespace CoreService.Controllers
                 temp.complaintStatus = complaint.complaintStatus;
                 temp.date = complaint.date;
                 temp.isAnonymous = complaint.isAnonymous;
-                
+
+                byte[] image = complaint.ImageByte;
+               // ImageController.SavePicture(image, "Test");
+                MemoryStream ms=new MemoryStream(image);
+                ImageController.UploadImageinBlob(ms,"test");
+
                 context.Complaints.Add(temp);
                 context.SaveChanges();
                 logger.LogMethod("jo", "SaveComplaint", "Exit", null);
