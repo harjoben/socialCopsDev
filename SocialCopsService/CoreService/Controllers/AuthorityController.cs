@@ -13,7 +13,8 @@ namespace CoreService.Controllers
     {
         Bug error = new Bug();
         Logger logger = new Logger();
-        socialcopsentity context;
+        SocialCopsEntities context;
+        
         string key;
 
         #region GetComplaintsByAuthId/{authId}
@@ -35,7 +36,7 @@ namespace CoreService.Controllers
                 }
 
                 int aid = Convert.ToInt32(authId);
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 //Getting the complaintIds from jurisdiction table where id is authId
                 var complaintIds = (from c
                                                    in context.Jurisdictions
@@ -72,6 +73,7 @@ namespace CoreService.Controllers
                     complaint.complaintStatus = temp.complaintStatus;
                     complaint.date = temp.date;
                     complaint.isAnonymous = temp.isAnonymous;
+                    
 
                     list.Add(complaint);
                 }
@@ -127,7 +129,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 List<Authority> auths = (from a
                                          in context.Authorities
                                          orderby a.date descending
@@ -186,7 +188,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 int aid = Convert.ToInt32(id);
                 List<Authority> auths = (from a
                                          in context.Authorities
@@ -255,7 +257,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 List<Authority> auths = (from a
                                          in context.Authorities
                                          where a.authName == name
@@ -315,7 +317,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 //int aid = Convert.ToInt32(id);
                 List<Authority> auths = (from a
                                          in context.Authorities
@@ -384,7 +386,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 int pts = Convert.ToInt32(num);
                 List<Authority> auths = (from a
                                          in context.Authorities
@@ -444,7 +446,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 int pts = Convert.ToInt32(num);
                 List<Authority> auths = (from a
                                          in context.Authorities

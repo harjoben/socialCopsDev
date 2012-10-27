@@ -43,10 +43,10 @@ namespace CoreService
         #endregion
 
         #region SaveUser
-        public bool SaveUser(userItem user)
+        public int SaveUser(userItem user)
         {
             uc = new UserController();
-            bool result = uc.SaveUser(user);
+            int result = uc.SaveUser(user);
             return result;
 
         }
@@ -62,10 +62,10 @@ namespace CoreService
         #endregion
 
         #region SaveComplaint
-        public bool SaveComplaint(complaintItem complaint)
+        public int SaveComplaint(complaintItem complaint)
         {
             cc = new ComplaintController();
-            bool result = cc.SaveComplaint(complaint);
+            int result = cc.SaveComplaint(complaint);
             return result;
         }
         #endregion 

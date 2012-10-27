@@ -4,41 +4,117 @@ using System.ComponentModel;
 
 namespace CoreService.Models
 {
-    public class authorityItem : INotifyPropertyChanged
+    public class muteAuthorityItem : INotifyPropertyChanged
     {
-        #region authId
-        private int _authId;
-        public int authId
+        #region muteAuthId
+        private int _muteAuthId;
+        public int muteAuthId
         {
             get
             {
-                return _authId;
+                return _muteAuthId;
             }
             set
             {
-                if (_authId != value)
+                if (_muteAuthId != value)
                 {
-                    _authId = value;
-                    NotifyPropertyChanged("authId");
+                    _muteAuthId = value;
+                    NotifyPropertyChanged("muteAuthId");
                 }
             }
         }
         #endregion
 
-        #region authName
-        private string _authName;
-        public string authName
+        #region muteAuthName
+        private string _muteAuthName;
+        public string muteAuthName
         {
             get
             {
-                return _authName;
+                return _muteAuthName;
             }
             set
             {
-                if (_authName != value)
+                if (_muteAuthName != value)
                 {
-                    _authName = value;
-                    NotifyPropertyChanged("authName");
+                    _muteAuthName = value;
+                    NotifyPropertyChanged("muteAuthName");
+                }
+            }
+        }
+        #endregion
+
+        #region MuteAuthAddress
+        private string _MuteAuthAddress;
+        public string MuteAuthAddress
+        {
+            get
+            {
+                return _MuteAuthAddress;
+            }
+            set
+            {
+                if (_MuteAuthAddress != value)
+                {
+                    _MuteAuthAddress = value;
+                    NotifyPropertyChanged("MuteAuthAddress");
+                }
+            }
+        }
+        #endregion
+
+        #region city
+        private string _city;
+        public string city
+        {
+            get
+            {
+                return _city;
+            }
+            set
+            {
+                if (_city != value)
+                {
+                    _city = value;
+                    NotifyPropertyChanged("city");
+                }
+            }
+        }
+        #endregion
+
+        #region state
+        private string _state;
+        public string state
+        {
+            get
+            {
+                return _state;
+            }
+            set
+            {
+                if (_state != value)
+                {
+                    _state = value;
+                    NotifyPropertyChanged("state");
+                }
+            }
+        }
+        #endregion
+
+        #region country
+        private string _country;
+        public string country
+        {
+            get
+            {
+                return _country;
+            }
+            set
+            {
+                if (_country != value)
+                {
+                    _country = value;
+                    NotifyPropertyChanged("country");
                 }
             }
         }
@@ -63,25 +139,6 @@ namespace CoreService.Models
         }
         #endregion
 
-        #region authAddress
-        private string _authAddress;
-        public string authAddress
-        {
-            get
-            {
-                return _authAddress;
-            }
-            set
-            {
-                if (_authAddress != value)
-                {
-                    _authAddress = value;
-                    NotifyPropertyChanged("authAddress");
-                }
-            }
-        }
-        #endregion
-
         #region phone
         private int _phone;
         public int phone
@@ -101,45 +158,7 @@ namespace CoreService.Models
         }
         #endregion
 
-        #region numPending
-        private int _numPending;
-        public int numPending
-        {
-            get
-            {
-                return _numPending;
-            }
-            set
-            {
-                if (_numPending != value)
-                {
-                    _numPending = value;
-                    NotifyPropertyChanged("numPending");
-                }
-            }
-        }
-        #endregion
-
-        #region numResolved
-        private int _numResolved;
-        public int numResolved
-        {
-            get
-            {
-                return _numResolved;
-            }
-            set
-            {
-                if (_numResolved != value)
-                {
-                    _numResolved = value;
-                    NotifyPropertyChanged("numResolved");
-                }
-            }
-        }
-        #endregion
-
-        #region wesite
+        #region website
         private string _website;
         public string website
         {
@@ -158,20 +177,20 @@ namespace CoreService.Models
         }
         #endregion
 
-        #region profilePic
-        private string _profilePic;
-        public string profilePic
+        #region pic
+        private string _pic;
+        public string pic
         {
             get
             {
-                return _profilePic;
+                return _pic;
             }
             set
             {
-                if (_profilePic != value)
+                if (_pic != value)
                 {
-                    _profilePic = value;
-                    NotifyPropertyChanged("profilePic");
+                    _pic = value;
+                    NotifyPropertyChanged("pic");
                 }
             }
         }
@@ -253,63 +272,6 @@ namespace CoreService.Models
         }
         #endregion
 
-        #region city
-        private string _city;
-        public string city
-        {
-            get
-            {
-                return _city;
-            }
-            set
-            {
-                if (_city != value)
-                {
-                    _city = value;
-                    NotifyPropertyChanged("city");
-                }
-            }
-        }
-        #endregion
-
-        #region state
-        private string _state;
-        public string state
-        {
-            get
-            {
-                return _state;
-            }
-            set
-            {
-                if (_state != value)
-                {
-                    _state = value;
-                    NotifyPropertyChanged("state");
-                }
-            }
-        }
-        #endregion
-
-        #region country
-        private string _country;
-        public string country
-        {
-            get
-            {
-                return _country;
-            }
-            set
-            {
-                if (_country != value)
-                {
-                    _country = value;
-                    NotifyPropertyChanged("country");
-                }
-            }
-        }
-        #endregion
-
         #region pincode
         private string _pincode;
         public string pincode
@@ -344,9 +306,9 @@ namespace CoreService.Models
 
         #endregion
 
-        public authorityItem GetCopy()
+        public muteAuthorityItem GetCopy()
         {
-            authorityItem copy = (authorityItem)this.MemberwiseClone();
+            muteAuthorityItem copy = (muteAuthorityItem)this.MemberwiseClone();
             return copy;
         }
     }

@@ -20,10 +20,10 @@ namespace CoreService
         bool TestConnection();
 
         [OperationContract]
-        [FaultContract(typeof(Error_Handling.Bug))]
+       
         [WebInvoke(Method = "POST", UriTemplate = "SaveUser",
            RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        bool SaveUser(userItem user);
+        int SaveUser(userItem user);
 
         [OperationContract]
         [FaultContract(typeof(Error_Handling.Bug))]
@@ -35,7 +35,7 @@ namespace CoreService
         [FaultContract(typeof(Error_Handling.Bug))]
         [WebInvoke(Method = "POST", UriTemplate = "SaveComplaint",
            RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        bool SaveComplaint(complaintItem complaint);
+        int SaveComplaint(complaintItem complaint);
 
         [OperationContract]
         [FaultContract(typeof(Error_Handling.Bug))]

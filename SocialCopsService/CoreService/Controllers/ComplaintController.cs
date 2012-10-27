@@ -14,19 +14,19 @@ namespace CoreService.Controllers
     {
         Bug error = new Bug();
         Logger logger = new Logger();
-        socialcopsentity context;
+        SocialCopsEntities context;
         string key;
 
         #region SaveComplaint
-        public bool SaveComplaint(complaintItem complaint)
+        public int SaveComplaint(complaintItem complaint)
         {
             try
             {
                 logger.LogMethod("jo", "SaveComplaint", "Enter", null);
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
 
                 Complaint temp = new Complaint();
-                temp.complaintId = complaint.complaintId;
+                //temp.complaintId = complaint.complaintId;
                 temp.userId = complaint.userId;
                 temp.title = complaint.title;
                 temp.details = complaint.details;
@@ -44,8 +44,8 @@ namespace CoreService.Controllers
                 
                 context.Complaints.Add(temp);
                 context.SaveChanges();
-                logger.LogMethod("jo", "SaveUser", "Exit", null);
-                return true;
+                logger.LogMethod("jo", "SaveComplaint", "Exit", null);
+                return temp.complaintId;
             }
             catch (Exception ex)
             {
@@ -65,7 +65,7 @@ namespace CoreService.Controllers
                 logger.LogMethod("jo", "GetComplaints", "Enter");
                 key = "GetComplaints";
                 List<complaintItem> list = new List<complaintItem>();
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
 
                 //Checking if the complaints exist in cache
                 //retrieveing complaints if they do.
@@ -131,7 +131,7 @@ namespace CoreService.Controllers
             {
 
                 logger.LogMethod("jo", "GetComplaints/{id}", "Enter");
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 if (CachingConfig.CachingEnabled)
                 {
                     temp = (complaintItem)WCFCache.Current[key];
@@ -197,7 +197,7 @@ namespace CoreService.Controllers
                 logger.LogMethod("jo", "GetComplaintsByCategory", "Enter");
                 key = category + "GetComplaintsByCategory";
                 List<complaintItem> list = new List<complaintItem>();
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
 
                 //Checking if the complaints exist in cache
                 //retrieveing complaints if they do.
@@ -262,7 +262,7 @@ namespace CoreService.Controllers
                 logger.LogMethod("jo", "GetComplaintsByStatus", "Enter");
                 key = complaintStatus + "GetComplaintsByStatus";
                 List<complaintItem> list = new List<complaintItem>();
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
 
                 //Checking if the complaints exist in cache
                 //retrieveing complaints if they do.
@@ -336,7 +336,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 int cid = Convert.ToInt32(complaintId);
                 List<Comment> comments = (from c
                                           in context.Comments
@@ -386,7 +386,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 int cid = Convert.ToInt32(complaintId);
                 List<Like> likes = (from c
                                           in context.Likes
@@ -423,7 +423,7 @@ namespace CoreService.Controllers
             try
             {
                 logger.LogMethod("jo", "SaveComment", "Enter");
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 Comment temp = new Comment();
                 temp.comment1 = comment.comment;
                 temp.complaintId = comment.complaintId;
@@ -451,7 +451,7 @@ namespace CoreService.Controllers
             try
             {
                 logger.LogMethod("jo", "SaveLike", "Enter");
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 Like temp = new Like();
                 temp.complaintId = like.complaintId;
                 temp.userId = like.userId;
@@ -490,7 +490,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 //Retrieving records from the database
                 int cid = Convert.ToInt32(complaintId);
                 List<Spam> spams = (from s
@@ -529,7 +529,7 @@ namespace CoreService.Controllers
             try
             {
                 logger.LogMethod("jo", "SaveSpam", "Enter");
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 Spam temp = new Spam();
                 temp.date = spam.date;
                 temp.complaintId = spam.complaintId;

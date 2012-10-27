@@ -12,31 +12,22 @@ namespace CoreService
     using System;
     using System.Collections.Generic;
     
-    public partial class Authority
+    public partial class MuteAuthority
     {
-        public Authority()
-        {
-            this.Jurisdictions = new HashSet<Jurisdiction>();
-        }
-    
-        public int authId { get; set; }
-        public string authName { get; set; }
-        public string authAddress { get; set; }
-        public string email { get; set; }
-        public string phone { get; set; }
-        public Nullable<int> numPending { get; set; }
-        public Nullable<int> numResolved { get; set; }
-        public Nullable<double> latitude { get; set; }
-        public Nullable<double> longitude { get; set; }
-        public string website { get; set; }
-        public string profilePic { get; set; }
-        public Nullable<int> flag { get; set; }
-        public System.DateTime date { get; set; }
+        public int muteAuthId { get; set; }
+        public string muteAuthName { get; set; }
+        public string muteAuthAddress { get; set; }
         public string city { get; set; }
         public string state { get; set; }
         public string country { get; set; }
+        public string email { get; set; }
+        public string phone { get; set; }
+        public Nullable<double> latitude { get; set; }
+        public Nullable<double> longitude { get; set; }
+        public string website { get; set; }
+        public string pic { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
+        public Nullable<int> flag { get; set; }
         public string pincode { get; set; }
-    
-        public virtual ICollection<Jurisdiction> Jurisdictions { get; set; }
     }
 }

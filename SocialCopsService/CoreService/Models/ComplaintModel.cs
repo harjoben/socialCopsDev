@@ -291,6 +291,120 @@ namespace CoreService.Models
         }
         #endregion
 
+        #region city
+        private string _city;
+        public string city
+        {
+            get
+            {
+                return _city;
+            }
+            set
+            {
+                if (_city != value)
+                {
+                    _city = value;
+                    NotifyPropertyChanged("city");
+                }
+            }
+        }
+        #endregion
+
+        #region state
+        private string _state;
+        public string state
+        {
+            get
+            {
+                return _state;
+            }
+            set
+            {
+                if (_state != value)
+                {
+                    _state = value;
+                    NotifyPropertyChanged("state");
+                }
+            }
+        }
+        #endregion
+
+        #region country
+        private string _country;
+        public string country
+        {
+            get
+            {
+                return _country;
+            }
+            set
+            {
+                if (_country != value)
+                {
+                    _country = value;
+                    NotifyPropertyChanged("country");
+                }
+            }
+        }
+        #endregion
+
+        #region pincode
+        private string _pincode;
+        public string pincode
+        {
+            get
+            {
+                return _pincode;
+            }
+            set
+            {
+                if (_pincode != value)
+                {
+                    _pincode = value;
+                    NotifyPropertyChanged("pincode");
+                }
+            }
+        }
+        #endregion
+
+        #region thumbImage1
+        private string _thumbImage1;
+        public string thumbImage1
+        {
+            get
+            {
+                return _thumbImage1;
+            }
+            set
+            {
+                if (_thumbImage1 != value)
+                {
+                    _thumbImage1 = value;
+                    NotifyPropertyChanged("thumbImage1");
+                }
+            }
+        }
+        #endregion
+
+        #region thumbImage2
+        private string _thumbImage2;
+        public string thumbImage2
+        {
+            get
+            {
+                return _thumbImage2;
+            }
+            set
+            {
+                if (_thumbImage2 != value)
+                {
+                    _thumbImage2 = value;
+                    NotifyPropertyChanged("thumbImage2");
+                }
+            }
+        }
+        #endregion
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;

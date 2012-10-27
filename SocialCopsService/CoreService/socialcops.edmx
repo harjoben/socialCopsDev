@@ -4,10 +4,10 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SocialCopsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="SocialCopsModelStoreContainer">
-          <EntitySet Name="Authorities" EntityType="SocialCopsModel.Store.Authorities" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Comments" EntityType="SocialCopsModel.Store.Comments" store:Type="Tables" store:Schema="dbo" store:Name="Comments">
+      <Schema Namespace="socialcopsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="socialcopsModelStoreContainer">
+          <EntitySet Name="Authorities" EntityType="socialcopsModel.Store.Authorities" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Comments" EntityType="socialcopsModel.Store.Comments" store:Type="Tables" store:Schema="dbo" store:Name="Comments">
             <DefiningQuery>SELECT 
       [Comments].[userId] AS [userId], 
       [Comments].[complaintId] AS [complaintId], 
@@ -15,77 +15,78 @@
       [Comments].[date] AS [date]
       FROM [dbo].[Comments] AS [Comments]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Complaints" EntityType="SocialCopsModel.Store.Complaints" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Jurisdiction" EntityType="SocialCopsModel.Store.Jurisdiction" store:Type="Tables" store:Schema="dbo" store:Name="Jurisdiction">
+          <EntitySet Name="Complaints" EntityType="socialcopsModel.Store.Complaints" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Jurisdiction" EntityType="socialcopsModel.Store.Jurisdiction" store:Type="Tables" store:Schema="dbo" store:Name="Jurisdiction">
             <DefiningQuery>SELECT 
       [Jurisdiction].[authId] AS [authId], 
       [Jurisdiction].[complaintId] AS [complaintId], 
       [Jurisdiction].[date] AS [date]
       FROM [dbo].[Jurisdiction] AS [Jurisdiction]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Likes" EntityType="SocialCopsModel.Store.Likes" store:Type="Tables" store:Schema="dbo" store:Name="Likes">
+          <EntitySet Name="Likes" EntityType="socialcopsModel.Store.Likes" store:Type="Tables" store:Schema="dbo" store:Name="Likes">
             <DefiningQuery>SELECT 
       [Likes].[userId] AS [userId], 
       [Likes].[complaintId] AS [complaintId], 
       [Likes].[date] AS [date]
       FROM [dbo].[Likes] AS [Likes]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Spam" EntityType="SocialCopsModel.Store.Spam" store:Type="Tables" store:Schema="dbo" store:Name="Spam">
+          <EntitySet Name="MuteAuthorities" EntityType="socialcopsModel.Store.MuteAuthorities" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Spam" EntityType="socialcopsModel.Store.Spam" store:Type="Tables" store:Schema="dbo" store:Name="Spam">
             <DefiningQuery>SELECT 
       [Spam].[userId] AS [userId], 
       [Spam].[complaintId] AS [complaintId], 
       [Spam].[date] AS [date]
       FROM [dbo].[Spam] AS [Spam]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Subscriptions" EntityType="SocialCopsModel.Store.Subscriptions" store:Type="Tables" store:Schema="dbo" store:Name="Subscriptions">
+          <EntitySet Name="Subscriptions" EntityType="socialcopsModel.Store.Subscriptions" store:Type="Tables" store:Schema="dbo" store:Name="Subscriptions">
             <DefiningQuery>SELECT 
       [Subscriptions].[subscriberId] AS [subscriberId], 
       [Subscriptions].[subscribedToId] AS [subscribedToId], 
       [Subscriptions].[date] AS [date]
       FROM [dbo].[Subscriptions] AS [Subscriptions]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Users" EntityType="SocialCopsModel.Store.Users" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK__Comments__compla__24927208" Association="SocialCopsModel.Store.FK__Comments__compla__24927208">
+          <EntitySet Name="Users" EntityType="socialcopsModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Comments__compla__24927208" Association="socialcopsModel.Store.FK__Comments__compla__24927208">
             <End Role="Complaints" EntitySet="Complaints" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Comments__userId__239E4DCF" Association="SocialCopsModel.Store.FK__Comments__userId__239E4DCF">
+          <AssociationSet Name="FK__Comments__userId__239E4DCF" Association="socialcopsModel.Store.FK__Comments__userId__239E4DCF">
             <End Role="Users" EntitySet="Users" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Complaint__userI__21B6055D" Association="SocialCopsModel.Store.FK__Complaint__userI__21B6055D">
+          <AssociationSet Name="FK__Complaint__userI__21B6055D" Association="socialcopsModel.Store.FK__Complaint__userI__21B6055D">
             <End Role="Users" EntitySet="Users" />
             <End Role="Complaints" EntitySet="Complaints" />
           </AssociationSet>
-          <AssociationSet Name="FK__Jurisdict__authI__267ABA7A" Association="SocialCopsModel.Store.FK__Jurisdict__authI__267ABA7A">
+          <AssociationSet Name="FK__Jurisdict__authI__267ABA7A" Association="socialcopsModel.Store.FK__Jurisdict__authI__267ABA7A">
             <End Role="Authorities" EntitySet="Authorities" />
             <End Role="Jurisdiction" EntitySet="Jurisdiction" />
           </AssociationSet>
-          <AssociationSet Name="FK__Jurisdict__compl__276EDEB3" Association="SocialCopsModel.Store.FK__Jurisdict__compl__276EDEB3">
+          <AssociationSet Name="FK__Jurisdict__compl__276EDEB3" Association="socialcopsModel.Store.FK__Jurisdict__compl__276EDEB3">
             <End Role="Complaints" EntitySet="Complaints" />
             <End Role="Jurisdiction" EntitySet="Jurisdiction" />
           </AssociationSet>
-          <AssociationSet Name="FK__Likes__complaint__2A4B4B5E" Association="SocialCopsModel.Store.FK__Likes__complaint__2A4B4B5E">
+          <AssociationSet Name="FK__Likes__complaint__2A4B4B5E" Association="socialcopsModel.Store.FK__Likes__complaint__2A4B4B5E">
             <End Role="Complaints" EntitySet="Complaints" />
             <End Role="Likes" EntitySet="Likes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Likes__userId__29572725" Association="SocialCopsModel.Store.FK__Likes__userId__29572725">
+          <AssociationSet Name="FK__Likes__userId__29572725" Association="socialcopsModel.Store.FK__Likes__userId__29572725">
             <End Role="Users" EntitySet="Users" />
             <End Role="Likes" EntitySet="Likes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Spam__complaintI__300424B4" Association="SocialCopsModel.Store.FK__Spam__complaintI__300424B4">
+          <AssociationSet Name="FK__Spam__complaintI__300424B4" Association="socialcopsModel.Store.FK__Spam__complaintI__300424B4">
             <End Role="Complaints" EntitySet="Complaints" />
             <End Role="Spam" EntitySet="Spam" />
           </AssociationSet>
-          <AssociationSet Name="FK__Spam__userId__2F10007B" Association="SocialCopsModel.Store.FK__Spam__userId__2F10007B">
+          <AssociationSet Name="FK__Spam__userId__2F10007B" Association="socialcopsModel.Store.FK__Spam__userId__2F10007B">
             <End Role="Users" EntitySet="Users" />
             <End Role="Spam" EntitySet="Spam" />
           </AssociationSet>
-          <AssociationSet Name="FK__Subscript__subsc__2C3393D0" Association="SocialCopsModel.Store.FK__Subscript__subsc__2C3393D0">
+          <AssociationSet Name="FK__Subscript__subsc__2C3393D0" Association="socialcopsModel.Store.FK__Subscript__subsc__2C3393D0">
             <End Role="Users" EntitySet="Users" />
             <End Role="Subscriptions" EntitySet="Subscriptions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Subscript__subsc__2D27B809" Association="SocialCopsModel.Store.FK__Subscript__subsc__2D27B809">
+          <AssociationSet Name="FK__Subscript__subsc__2D27B809" Association="socialcopsModel.Store.FK__Subscript__subsc__2D27B809">
             <End Role="Users" EntitySet="Users" />
             <End Role="Subscriptions" EntitySet="Subscriptions" />
           </AssociationSet>
@@ -107,6 +108,10 @@
           <Property Name="profilePic" Type="varchar" MaxLength="200" />
           <Property Name="flag" Type="int" />
           <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="200" />
+          <Property Name="state" Type="varchar" MaxLength="200" />
+          <Property Name="country" Type="varchar" MaxLength="200" />
+          <Property Name="pincode" Type="varchar" MaxLength="10" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'socialcops.dbo.Comments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -142,6 +147,10 @@
           <Property Name="complaintStatus" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="date" Type="datetime" Nullable="false" />
           <Property Name="isAnonymous" Type="int" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="200" />
+          <Property Name="state" Type="varchar" MaxLength="200" />
+          <Property Name="country" Type="varchar" MaxLength="200" />
+          <Property Name="pincode" Type="varchar" MaxLength="10" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'socialcops.dbo.Jurisdiction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -168,6 +177,26 @@
           <Property Name="userId" Type="int" Nullable="false" />
           <Property Name="complaintId" Type="int" Nullable="false" />
           <Property Name="date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MuteAuthorities">
+          <Key>
+            <PropertyRef Name="muteAuthId" />
+          </Key>
+          <Property Name="muteAuthId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="muteAuthName" Type="varchar" MaxLength="200" />
+          <Property Name="muteAuthAddress" Type="varchar" MaxLength="1000" />
+          <Property Name="city" Type="varchar" MaxLength="100" />
+          <Property Name="state" Type="varchar" MaxLength="100" />
+          <Property Name="country" Type="varchar" MaxLength="200" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="20" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="website" Type="varchar" MaxLength="50" />
+          <Property Name="pic" Type="varchar" MaxLength="500" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="flag" Type="int" />
+          <Property Name="pincode" Type="varchar" MaxLength="10" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'socialcops.dbo.Spam' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -212,10 +241,14 @@
           <Property Name="phoneURI" Type="varchar" MaxLength="200" />
           <Property Name="numComplaints" Type="int" />
           <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="200" />
+          <Property Name="state" Type="varchar" MaxLength="200" />
+          <Property Name="country" Type="varchar" MaxLength="200" />
+          <Property Name="pincode" Type="varchar" MaxLength="10" />
         </EntityType>
         <Association Name="FK__Comments__compla__24927208">
-          <End Role="Complaints" Type="SocialCopsModel.Store.Complaints" Multiplicity="1" />
-          <End Role="Comments" Type="SocialCopsModel.Store.Comments" Multiplicity="*" />
+          <End Role="Complaints" Type="socialcopsModel.Store.Complaints" Multiplicity="1" />
+          <End Role="Comments" Type="socialcopsModel.Store.Comments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Complaints">
               <PropertyRef Name="complaintId" />
@@ -226,8 +259,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Comments__userId__239E4DCF">
-          <End Role="Users" Type="SocialCopsModel.Store.Users" Multiplicity="1" />
-          <End Role="Comments" Type="SocialCopsModel.Store.Comments" Multiplicity="*" />
+          <End Role="Users" Type="socialcopsModel.Store.Users" Multiplicity="1" />
+          <End Role="Comments" Type="socialcopsModel.Store.Comments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="userId" />
@@ -238,8 +271,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Complaint__userI__21B6055D">
-          <End Role="Users" Type="SocialCopsModel.Store.Users" Multiplicity="1" />
-          <End Role="Complaints" Type="SocialCopsModel.Store.Complaints" Multiplicity="*" />
+          <End Role="Users" Type="socialcopsModel.Store.Users" Multiplicity="1" />
+          <End Role="Complaints" Type="socialcopsModel.Store.Complaints" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="userId" />
@@ -250,8 +283,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Jurisdict__authI__267ABA7A">
-          <End Role="Authorities" Type="SocialCopsModel.Store.Authorities" Multiplicity="1" />
-          <End Role="Jurisdiction" Type="SocialCopsModel.Store.Jurisdiction" Multiplicity="*" />
+          <End Role="Authorities" Type="socialcopsModel.Store.Authorities" Multiplicity="1" />
+          <End Role="Jurisdiction" Type="socialcopsModel.Store.Jurisdiction" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Authorities">
               <PropertyRef Name="authId" />
@@ -262,8 +295,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Jurisdict__compl__276EDEB3">
-          <End Role="Complaints" Type="SocialCopsModel.Store.Complaints" Multiplicity="1" />
-          <End Role="Jurisdiction" Type="SocialCopsModel.Store.Jurisdiction" Multiplicity="*" />
+          <End Role="Complaints" Type="socialcopsModel.Store.Complaints" Multiplicity="1" />
+          <End Role="Jurisdiction" Type="socialcopsModel.Store.Jurisdiction" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Complaints">
               <PropertyRef Name="complaintId" />
@@ -274,8 +307,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Likes__complaint__2A4B4B5E">
-          <End Role="Complaints" Type="SocialCopsModel.Store.Complaints" Multiplicity="1" />
-          <End Role="Likes" Type="SocialCopsModel.Store.Likes" Multiplicity="*" />
+          <End Role="Complaints" Type="socialcopsModel.Store.Complaints" Multiplicity="1" />
+          <End Role="Likes" Type="socialcopsModel.Store.Likes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Complaints">
               <PropertyRef Name="complaintId" />
@@ -286,8 +319,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Likes__userId__29572725">
-          <End Role="Users" Type="SocialCopsModel.Store.Users" Multiplicity="1" />
-          <End Role="Likes" Type="SocialCopsModel.Store.Likes" Multiplicity="*" />
+          <End Role="Users" Type="socialcopsModel.Store.Users" Multiplicity="1" />
+          <End Role="Likes" Type="socialcopsModel.Store.Likes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="userId" />
@@ -298,8 +331,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Spam__complaintI__300424B4">
-          <End Role="Complaints" Type="SocialCopsModel.Store.Complaints" Multiplicity="1" />
-          <End Role="Spam" Type="SocialCopsModel.Store.Spam" Multiplicity="*" />
+          <End Role="Complaints" Type="socialcopsModel.Store.Complaints" Multiplicity="1" />
+          <End Role="Spam" Type="socialcopsModel.Store.Spam" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Complaints">
               <PropertyRef Name="complaintId" />
@@ -310,8 +343,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Spam__userId__2F10007B">
-          <End Role="Users" Type="SocialCopsModel.Store.Users" Multiplicity="1" />
-          <End Role="Spam" Type="SocialCopsModel.Store.Spam" Multiplicity="*" />
+          <End Role="Users" Type="socialcopsModel.Store.Users" Multiplicity="1" />
+          <End Role="Spam" Type="socialcopsModel.Store.Spam" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="userId" />
@@ -322,8 +355,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Subscript__subsc__2C3393D0">
-          <End Role="Users" Type="SocialCopsModel.Store.Users" Multiplicity="1" />
-          <End Role="Subscriptions" Type="SocialCopsModel.Store.Subscriptions" Multiplicity="*" />
+          <End Role="Users" Type="socialcopsModel.Store.Users" Multiplicity="1" />
+          <End Role="Subscriptions" Type="socialcopsModel.Store.Subscriptions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="userId" />
@@ -334,8 +367,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Subscript__subsc__2D27B809">
-          <End Role="Users" Type="SocialCopsModel.Store.Users" Multiplicity="1" />
-          <End Role="Subscriptions" Type="SocialCopsModel.Store.Subscriptions" Multiplicity="*" />
+          <End Role="Users" Type="socialcopsModel.Store.Users" Multiplicity="1" />
+          <End Role="Subscriptions" Type="socialcopsModel.Store.Subscriptions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="userId" />
@@ -349,57 +382,58 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SocialCopsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="socialcopsentity" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Authorities" EntityType="SocialCopsModel.Authority" />
-          <EntitySet Name="Comments" EntityType="SocialCopsModel.Comment" />
-          <EntitySet Name="Complaints" EntityType="SocialCopsModel.Complaint" />
-          <EntitySet Name="Jurisdictions" EntityType="SocialCopsModel.Jurisdiction" />
-          <EntitySet Name="Likes" EntityType="SocialCopsModel.Like" />
-          <EntitySet Name="Spams" EntityType="SocialCopsModel.Spam" />
-          <EntitySet Name="Subscriptions" EntityType="SocialCopsModel.Subscription" />
-          <EntitySet Name="Users" EntityType="SocialCopsModel.User" />
-          <AssociationSet Name="FK__Jurisdict__authI__267ABA7A" Association="SocialCopsModel.FK__Jurisdict__authI__267ABA7A">
+      <Schema Namespace="socialcopsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SocialCopsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Authorities" EntityType="socialcopsModel.Authority" />
+          <EntitySet Name="Comments" EntityType="socialcopsModel.Comment" />
+          <EntitySet Name="Complaints" EntityType="socialcopsModel.Complaint" />
+          <EntitySet Name="Jurisdictions" EntityType="socialcopsModel.Jurisdiction" />
+          <EntitySet Name="Likes" EntityType="socialcopsModel.Like" />
+          <EntitySet Name="MuteAuthorities" EntityType="socialcopsModel.MuteAuthority" />
+          <EntitySet Name="Spams" EntityType="socialcopsModel.Spam" />
+          <EntitySet Name="Subscriptions" EntityType="socialcopsModel.Subscription" />
+          <EntitySet Name="Users" EntityType="socialcopsModel.User" />
+          <AssociationSet Name="FK__Jurisdict__authI__267ABA7A" Association="socialcopsModel.FK__Jurisdict__authI__267ABA7A">
             <End Role="Authorities" EntitySet="Authorities" />
             <End Role="Jurisdiction" EntitySet="Jurisdictions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Comments__compla__24927208" Association="SocialCopsModel.FK__Comments__compla__24927208">
+          <AssociationSet Name="FK__Comments__compla__24927208" Association="socialcopsModel.FK__Comments__compla__24927208">
             <End Role="Complaints" EntitySet="Complaints" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Comments__userId__239E4DCF" Association="SocialCopsModel.FK__Comments__userId__239E4DCF">
+          <AssociationSet Name="FK__Comments__userId__239E4DCF" Association="socialcopsModel.FK__Comments__userId__239E4DCF">
             <End Role="Users" EntitySet="Users" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Complaint__userI__21B6055D" Association="SocialCopsModel.FK__Complaint__userI__21B6055D">
+          <AssociationSet Name="FK__Complaint__userI__21B6055D" Association="socialcopsModel.FK__Complaint__userI__21B6055D">
             <End Role="Users" EntitySet="Users" />
             <End Role="Complaints" EntitySet="Complaints" />
           </AssociationSet>
-          <AssociationSet Name="FK__Jurisdict__compl__276EDEB3" Association="SocialCopsModel.FK__Jurisdict__compl__276EDEB3">
+          <AssociationSet Name="FK__Jurisdict__compl__276EDEB3" Association="socialcopsModel.FK__Jurisdict__compl__276EDEB3">
             <End Role="Complaints" EntitySet="Complaints" />
             <End Role="Jurisdiction" EntitySet="Jurisdictions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Likes__complaint__2A4B4B5E" Association="SocialCopsModel.FK__Likes__complaint__2A4B4B5E">
+          <AssociationSet Name="FK__Likes__complaint__2A4B4B5E" Association="socialcopsModel.FK__Likes__complaint__2A4B4B5E">
             <End Role="Complaints" EntitySet="Complaints" />
             <End Role="Likes" EntitySet="Likes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Spam__complaintI__300424B4" Association="SocialCopsModel.FK__Spam__complaintI__300424B4">
+          <AssociationSet Name="FK__Spam__complaintI__300424B4" Association="socialcopsModel.FK__Spam__complaintI__300424B4">
             <End Role="Complaints" EntitySet="Complaints" />
             <End Role="Spam" EntitySet="Spams" />
           </AssociationSet>
-          <AssociationSet Name="FK__Likes__userId__29572725" Association="SocialCopsModel.FK__Likes__userId__29572725">
+          <AssociationSet Name="FK__Likes__userId__29572725" Association="socialcopsModel.FK__Likes__userId__29572725">
             <End Role="Users" EntitySet="Users" />
             <End Role="Likes" EntitySet="Likes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Spam__userId__2F10007B" Association="SocialCopsModel.FK__Spam__userId__2F10007B">
+          <AssociationSet Name="FK__Spam__userId__2F10007B" Association="socialcopsModel.FK__Spam__userId__2F10007B">
             <End Role="Users" EntitySet="Users" />
             <End Role="Spam" EntitySet="Spams" />
           </AssociationSet>
-          <AssociationSet Name="FK__Subscript__subsc__2C3393D0" Association="SocialCopsModel.FK__Subscript__subsc__2C3393D0">
+          <AssociationSet Name="FK__Subscript__subsc__2C3393D0" Association="socialcopsModel.FK__Subscript__subsc__2C3393D0">
             <End Role="Users" EntitySet="Users" />
             <End Role="Subscriptions" EntitySet="Subscriptions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Subscript__subsc__2D27B809" Association="SocialCopsModel.FK__Subscript__subsc__2D27B809">
+          <AssociationSet Name="FK__Subscript__subsc__2D27B809" Association="socialcopsModel.FK__Subscript__subsc__2D27B809">
             <End Role="Users" EntitySet="Users" />
             <End Role="Subscriptions" EntitySet="Subscriptions" />
           </AssociationSet>
@@ -421,7 +455,11 @@
           <Property Name="profilePic" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="flag" Type="Int32" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Jurisdictions" Relationship="SocialCopsModel.FK__Jurisdict__authI__267ABA7A" FromRole="Authorities" ToRole="Jurisdiction" />
+          <Property Name="city" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="state" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="country" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="pincode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Jurisdictions" Relationship="socialcopsModel.FK__Jurisdict__authI__267ABA7A" FromRole="Authorities" ToRole="Jurisdiction" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -434,8 +472,8 @@
           <Property Name="complaintId" Type="Int32" Nullable="false" />
           <Property Name="comment1" Type="String" Nullable="false" MaxLength="2000" Unicode="false" FixedLength="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Complaint" Relationship="SocialCopsModel.FK__Comments__compla__24927208" FromRole="Comments" ToRole="Complaints" />
-          <NavigationProperty Name="User" Relationship="SocialCopsModel.FK__Comments__userId__239E4DCF" FromRole="Comments" ToRole="Users" />
+          <NavigationProperty Name="Complaint" Relationship="socialcopsModel.FK__Comments__compla__24927208" FromRole="Comments" ToRole="Complaints" />
+          <NavigationProperty Name="User" Relationship="socialcopsModel.FK__Comments__userId__239E4DCF" FromRole="Comments" ToRole="Users" />
         </EntityType>
         <EntityType Name="Complaint">
           <Key>
@@ -456,11 +494,15 @@
           <Property Name="complaintStatus" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="isAnonymous" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Comments" Relationship="SocialCopsModel.FK__Comments__compla__24927208" FromRole="Complaints" ToRole="Comments" />
-          <NavigationProperty Name="User" Relationship="SocialCopsModel.FK__Complaint__userI__21B6055D" FromRole="Complaints" ToRole="Users" />
-          <NavigationProperty Name="Jurisdictions" Relationship="SocialCopsModel.FK__Jurisdict__compl__276EDEB3" FromRole="Complaints" ToRole="Jurisdiction" />
-          <NavigationProperty Name="Likes" Relationship="SocialCopsModel.FK__Likes__complaint__2A4B4B5E" FromRole="Complaints" ToRole="Likes" />
-          <NavigationProperty Name="Spams" Relationship="SocialCopsModel.FK__Spam__complaintI__300424B4" FromRole="Complaints" ToRole="Spam" />
+          <Property Name="city" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="state" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="country" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="pincode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Comments" Relationship="socialcopsModel.FK__Comments__compla__24927208" FromRole="Complaints" ToRole="Comments" />
+          <NavigationProperty Name="User" Relationship="socialcopsModel.FK__Complaint__userI__21B6055D" FromRole="Complaints" ToRole="Users" />
+          <NavigationProperty Name="Jurisdictions" Relationship="socialcopsModel.FK__Jurisdict__compl__276EDEB3" FromRole="Complaints" ToRole="Jurisdiction" />
+          <NavigationProperty Name="Likes" Relationship="socialcopsModel.FK__Likes__complaint__2A4B4B5E" FromRole="Complaints" ToRole="Likes" />
+          <NavigationProperty Name="Spams" Relationship="socialcopsModel.FK__Spam__complaintI__300424B4" FromRole="Complaints" ToRole="Spam" />
         </EntityType>
         <EntityType Name="Jurisdiction">
           <Key>
@@ -471,8 +513,8 @@
           <Property Name="authId" Type="Int32" Nullable="false" />
           <Property Name="complaintId" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Authority" Relationship="SocialCopsModel.FK__Jurisdict__authI__267ABA7A" FromRole="Jurisdiction" ToRole="Authorities" />
-          <NavigationProperty Name="Complaint" Relationship="SocialCopsModel.FK__Jurisdict__compl__276EDEB3" FromRole="Jurisdiction" ToRole="Complaints" />
+          <NavigationProperty Name="Authority" Relationship="socialcopsModel.FK__Jurisdict__authI__267ABA7A" FromRole="Jurisdiction" ToRole="Authorities" />
+          <NavigationProperty Name="Complaint" Relationship="socialcopsModel.FK__Jurisdict__compl__276EDEB3" FromRole="Jurisdiction" ToRole="Complaints" />
         </EntityType>
         <EntityType Name="Like">
           <Key>
@@ -483,8 +525,28 @@
           <Property Name="userId" Type="Int32" Nullable="false" />
           <Property Name="complaintId" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Complaint" Relationship="SocialCopsModel.FK__Likes__complaint__2A4B4B5E" FromRole="Likes" ToRole="Complaints" />
-          <NavigationProperty Name="User" Relationship="SocialCopsModel.FK__Likes__userId__29572725" FromRole="Likes" ToRole="Users" />
+          <NavigationProperty Name="Complaint" Relationship="socialcopsModel.FK__Likes__complaint__2A4B4B5E" FromRole="Likes" ToRole="Complaints" />
+          <NavigationProperty Name="User" Relationship="socialcopsModel.FK__Likes__userId__29572725" FromRole="Likes" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="MuteAuthority">
+          <Key>
+            <PropertyRef Name="muteAuthId" />
+          </Key>
+          <Property Name="muteAuthId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="muteAuthName" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="muteAuthAddress" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="city" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="state" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="country" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="phone" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="website" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="pic" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="flag" Type="Int32" />
+          <Property Name="pincode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="Spam">
           <Key>
@@ -495,8 +557,8 @@
           <Property Name="userId" Type="Int32" Nullable="false" />
           <Property Name="complaintId" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Complaint" Relationship="SocialCopsModel.FK__Spam__complaintI__300424B4" FromRole="Spam" ToRole="Complaints" />
-          <NavigationProperty Name="User" Relationship="SocialCopsModel.FK__Spam__userId__2F10007B" FromRole="Spam" ToRole="Users" />
+          <NavigationProperty Name="Complaint" Relationship="socialcopsModel.FK__Spam__complaintI__300424B4" FromRole="Spam" ToRole="Complaints" />
+          <NavigationProperty Name="User" Relationship="socialcopsModel.FK__Spam__userId__2F10007B" FromRole="Spam" ToRole="Users" />
         </EntityType>
         <EntityType Name="Subscription">
           <Key>
@@ -507,8 +569,8 @@
           <Property Name="subscriberId" Type="Int32" Nullable="false" />
           <Property Name="subscribedToId" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="User" Relationship="SocialCopsModel.FK__Subscript__subsc__2C3393D0" FromRole="Subscriptions" ToRole="Users" />
-          <NavigationProperty Name="User1" Relationship="SocialCopsModel.FK__Subscript__subsc__2D27B809" FromRole="Subscriptions" ToRole="Users" />
+          <NavigationProperty Name="User" Relationship="socialcopsModel.FK__Subscript__subsc__2C3393D0" FromRole="Subscriptions" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="socialcopsModel.FK__Subscript__subsc__2D27B809" FromRole="Subscriptions" ToRole="Users" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -527,16 +589,20 @@
           <Property Name="phoneURI" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="numComplaints" Type="Int32" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Comments" Relationship="SocialCopsModel.FK__Comments__userId__239E4DCF" FromRole="Users" ToRole="Comments" />
-          <NavigationProperty Name="Complaints" Relationship="SocialCopsModel.FK__Complaint__userI__21B6055D" FromRole="Users" ToRole="Complaints" />
-          <NavigationProperty Name="Likes" Relationship="SocialCopsModel.FK__Likes__userId__29572725" FromRole="Users" ToRole="Likes" />
-          <NavigationProperty Name="Spams" Relationship="SocialCopsModel.FK__Spam__userId__2F10007B" FromRole="Users" ToRole="Spam" />
-          <NavigationProperty Name="Subscriptions" Relationship="SocialCopsModel.FK__Subscript__subsc__2C3393D0" FromRole="Users" ToRole="Subscriptions" />
-          <NavigationProperty Name="Subscriptions1" Relationship="SocialCopsModel.FK__Subscript__subsc__2D27B809" FromRole="Users" ToRole="Subscriptions" />
+          <Property Name="city" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="state" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="country" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="pincode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Comments" Relationship="socialcopsModel.FK__Comments__userId__239E4DCF" FromRole="Users" ToRole="Comments" />
+          <NavigationProperty Name="Complaints" Relationship="socialcopsModel.FK__Complaint__userI__21B6055D" FromRole="Users" ToRole="Complaints" />
+          <NavigationProperty Name="Likes" Relationship="socialcopsModel.FK__Likes__userId__29572725" FromRole="Users" ToRole="Likes" />
+          <NavigationProperty Name="Spams" Relationship="socialcopsModel.FK__Spam__userId__2F10007B" FromRole="Users" ToRole="Spam" />
+          <NavigationProperty Name="Subscriptions" Relationship="socialcopsModel.FK__Subscript__subsc__2C3393D0" FromRole="Users" ToRole="Subscriptions" />
+          <NavigationProperty Name="Subscriptions1" Relationship="socialcopsModel.FK__Subscript__subsc__2D27B809" FromRole="Users" ToRole="Subscriptions" />
         </EntityType>
         <Association Name="FK__Jurisdict__authI__267ABA7A">
-          <End Role="Authorities" Type="SocialCopsModel.Authority" Multiplicity="1" />
-          <End Role="Jurisdiction" Type="SocialCopsModel.Jurisdiction" Multiplicity="*" />
+          <End Role="Authorities" Type="socialcopsModel.Authority" Multiplicity="1" />
+          <End Role="Jurisdiction" Type="socialcopsModel.Jurisdiction" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Authorities">
               <PropertyRef Name="authId" />
@@ -547,8 +613,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Comments__compla__24927208">
-          <End Role="Complaints" Type="SocialCopsModel.Complaint" Multiplicity="1" />
-          <End Role="Comments" Type="SocialCopsModel.Comment" Multiplicity="*" />
+          <End Role="Complaints" Type="socialcopsModel.Complaint" Multiplicity="1" />
+          <End Role="Comments" Type="socialcopsModel.Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Complaints">
               <PropertyRef Name="complaintId" />
@@ -559,8 +625,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Comments__userId__239E4DCF">
-          <End Role="Users" Type="SocialCopsModel.User" Multiplicity="1" />
-          <End Role="Comments" Type="SocialCopsModel.Comment" Multiplicity="*" />
+          <End Role="Users" Type="socialcopsModel.User" Multiplicity="1" />
+          <End Role="Comments" Type="socialcopsModel.Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="userId" />
@@ -571,8 +637,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Complaint__userI__21B6055D">
-          <End Role="Users" Type="SocialCopsModel.User" Multiplicity="1" />
-          <End Role="Complaints" Type="SocialCopsModel.Complaint" Multiplicity="*" />
+          <End Role="Users" Type="socialcopsModel.User" Multiplicity="1" />
+          <End Role="Complaints" Type="socialcopsModel.Complaint" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="userId" />
@@ -583,8 +649,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Jurisdict__compl__276EDEB3">
-          <End Role="Complaints" Type="SocialCopsModel.Complaint" Multiplicity="1" />
-          <End Role="Jurisdiction" Type="SocialCopsModel.Jurisdiction" Multiplicity="*" />
+          <End Role="Complaints" Type="socialcopsModel.Complaint" Multiplicity="1" />
+          <End Role="Jurisdiction" Type="socialcopsModel.Jurisdiction" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Complaints">
               <PropertyRef Name="complaintId" />
@@ -595,8 +661,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Likes__complaint__2A4B4B5E">
-          <End Role="Complaints" Type="SocialCopsModel.Complaint" Multiplicity="1" />
-          <End Role="Likes" Type="SocialCopsModel.Like" Multiplicity="*" />
+          <End Role="Complaints" Type="socialcopsModel.Complaint" Multiplicity="1" />
+          <End Role="Likes" Type="socialcopsModel.Like" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Complaints">
               <PropertyRef Name="complaintId" />
@@ -607,8 +673,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Spam__complaintI__300424B4">
-          <End Role="Complaints" Type="SocialCopsModel.Complaint" Multiplicity="1" />
-          <End Role="Spam" Type="SocialCopsModel.Spam" Multiplicity="*" />
+          <End Role="Complaints" Type="socialcopsModel.Complaint" Multiplicity="1" />
+          <End Role="Spam" Type="socialcopsModel.Spam" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Complaints">
               <PropertyRef Name="complaintId" />
@@ -619,8 +685,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Likes__userId__29572725">
-          <End Role="Users" Type="SocialCopsModel.User" Multiplicity="1" />
-          <End Role="Likes" Type="SocialCopsModel.Like" Multiplicity="*" />
+          <End Role="Users" Type="socialcopsModel.User" Multiplicity="1" />
+          <End Role="Likes" Type="socialcopsModel.Like" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="userId" />
@@ -631,8 +697,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Spam__userId__2F10007B">
-          <End Role="Users" Type="SocialCopsModel.User" Multiplicity="1" />
-          <End Role="Spam" Type="SocialCopsModel.Spam" Multiplicity="*" />
+          <End Role="Users" Type="socialcopsModel.User" Multiplicity="1" />
+          <End Role="Spam" Type="socialcopsModel.Spam" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="userId" />
@@ -643,8 +709,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Subscript__subsc__2C3393D0">
-          <End Role="Users" Type="SocialCopsModel.User" Multiplicity="1" />
-          <End Role="Subscriptions" Type="SocialCopsModel.Subscription" Multiplicity="*" />
+          <End Role="Users" Type="socialcopsModel.User" Multiplicity="1" />
+          <End Role="Subscriptions" Type="socialcopsModel.Subscription" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="userId" />
@@ -655,8 +721,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Subscript__subsc__2D27B809">
-          <End Role="Users" Type="SocialCopsModel.User" Multiplicity="1" />
-          <End Role="Subscriptions" Type="SocialCopsModel.Subscription" Multiplicity="*" />
+          <End Role="Users" Type="socialcopsModel.User" Multiplicity="1" />
+          <End Role="Subscriptions" Type="socialcopsModel.Subscription" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="userId" />
@@ -671,9 +737,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SocialCopsModelStoreContainer" CdmEntityContainer="socialcopsentity">
+        <EntityContainerMapping StorageEntityContainer="socialcopsModelStoreContainer" CdmEntityContainer="SocialCopsEntities">
           <EntitySetMapping Name="Authorities">
-            <EntityTypeMapping TypeName="SocialCopsModel.Authority">
+            <EntityTypeMapping TypeName="socialcopsModel.Authority">
               <MappingFragment StoreEntitySet="Authorities">
                 <ScalarProperty Name="authId" ColumnName="authId" />
                 <ScalarProperty Name="authName" ColumnName="authName" />
@@ -688,11 +754,15 @@
                 <ScalarProperty Name="profilePic" ColumnName="profilePic" />
                 <ScalarProperty Name="flag" ColumnName="flag" />
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="pincode" ColumnName="pincode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Comments">
-            <EntityTypeMapping TypeName="SocialCopsModel.Comment">
+            <EntityTypeMapping TypeName="socialcopsModel.Comment">
               <MappingFragment StoreEntitySet="Comments">
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="complaintId" ColumnName="complaintId" />
@@ -702,7 +772,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Complaints">
-            <EntityTypeMapping TypeName="SocialCopsModel.Complaint">
+            <EntityTypeMapping TypeName="socialcopsModel.Complaint">
               <MappingFragment StoreEntitySet="Complaints">
                 <ScalarProperty Name="complaintId" ColumnName="complaintId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
@@ -719,11 +789,15 @@
                 <ScalarProperty Name="complaintStatus" ColumnName="complaintStatus" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="pincode" ColumnName="pincode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Jurisdictions">
-            <EntityTypeMapping TypeName="SocialCopsModel.Jurisdiction">
+            <EntityTypeMapping TypeName="socialcopsModel.Jurisdiction">
               <MappingFragment StoreEntitySet="Jurisdiction">
                 <ScalarProperty Name="authId" ColumnName="authId" />
                 <ScalarProperty Name="complaintId" ColumnName="complaintId" />
@@ -732,7 +806,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Likes">
-            <EntityTypeMapping TypeName="SocialCopsModel.Like">
+            <EntityTypeMapping TypeName="socialcopsModel.Like">
               <MappingFragment StoreEntitySet="Likes">
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="complaintId" ColumnName="complaintId" />
@@ -740,8 +814,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MuteAuthorities">
+            <EntityTypeMapping TypeName="socialcopsModel.MuteAuthority">
+              <MappingFragment StoreEntitySet="MuteAuthorities">
+                <ScalarProperty Name="muteAuthId" ColumnName="muteAuthId" />
+                <ScalarProperty Name="muteAuthName" ColumnName="muteAuthName" />
+                <ScalarProperty Name="muteAuthAddress" ColumnName="muteAuthAddress" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+                <ScalarProperty Name="pincode" ColumnName="pincode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Spams">
-            <EntityTypeMapping TypeName="SocialCopsModel.Spam">
+            <EntityTypeMapping TypeName="socialcopsModel.Spam">
               <MappingFragment StoreEntitySet="Spam">
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="complaintId" ColumnName="complaintId" />
@@ -750,7 +845,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Subscriptions">
-            <EntityTypeMapping TypeName="SocialCopsModel.Subscription">
+            <EntityTypeMapping TypeName="socialcopsModel.Subscription">
               <MappingFragment StoreEntitySet="Subscriptions">
                 <ScalarProperty Name="subscriberId" ColumnName="subscriberId" />
                 <ScalarProperty Name="subscribedToId" ColumnName="subscribedToId" />
@@ -759,7 +854,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="SocialCopsModel.User">
+            <EntityTypeMapping TypeName="socialcopsModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="userName" ColumnName="userName" />
@@ -774,6 +869,10 @@
                 <ScalarProperty Name="phoneURI" ColumnName="phoneURI" />
                 <ScalarProperty Name="numComplaints" ColumnName="numComplaints" />
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="pincode" ColumnName="pincode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

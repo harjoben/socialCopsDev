@@ -6,6 +6,7 @@ using System.Web;
 
 namespace CoreService.Error_Handling
 {
+    [DataContract]
     public class Bug
     {
         [DataMember]

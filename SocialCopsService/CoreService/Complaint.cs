@@ -37,6 +37,10 @@ namespace CoreService
         public string complaintStatus { get; set; }
         public System.DateTime date { get; set; }
         public int isAnonymous { get; set; }
+        public string city { get; set; }
+        public string state { get; set; }
+        public string country { get; set; }
+        public string pincode { get; set; }
     
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual User User { get; set; }

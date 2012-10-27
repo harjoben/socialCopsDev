@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using System.Web;
 
 namespace CoreService.Controllers
@@ -13,16 +14,16 @@ namespace CoreService.Controllers
     {
         Bug error = new Bug();
         Logger logger = new Logger();
-        socialcopsentity context;
+        SocialCopsEntities context;
         string key;
 
         #region SaveUser
-        public bool SaveUser(userItem user)
+        public int SaveUser(userItem user) 
         {
             try
             {
                 logger.LogMethod("jo", "SaveUser", "Enter", null);
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 User temp = new User();
 
                 List<User> users = (from u
@@ -33,9 +34,12 @@ namespace CoreService.Controllers
                 if (users.Count > 0)
                 {
                     logger.LogMethod("jo", "SaveUser", "Invalid Sign-up. Email address already exists.");
+                    error.ErrorDetails = "Abc";
+
                     error.Result = false;
                     error.ErrorMessage = "Email address already exists. Cannot register again.";
-                    throw new FaultException<Bug>(error);
+             
+                    throw new WebFaultException<Bug>(error,System.Net.HttpStatusCode.NotAcceptable);
                 }
 
                 temp.userName = user.userName;
@@ -52,7 +56,13 @@ namespace CoreService.Controllers
                 context.Users.Add(temp);
                 context.SaveChanges();
                 logger.LogMethod("jo", "SaveUser", "Exit", null);
-                return true;
+                //userItem u = (userItem)context.Entry(temp);
+                return temp.userId;
+            }
+            catch (WebFaultException<Bug> ex)
+            {
+
+                throw;
             }
             catch (Exception ex)
             {
@@ -71,7 +81,7 @@ namespace CoreService.Controllers
             try
             {
                 logger.LogMethod("jo", "thirdpartylogin", "Enter");
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 List<User> users = (from u
                                     in context.Users
                                     where u.email == user.email
@@ -113,7 +123,7 @@ namespace CoreService.Controllers
                 logger.LogMethod("jo", "GetComplaintsByUserId", "Enter");
                 key = userId.ToString() + "GetComplaintsByUserId";
                 List<complaintItem> list = new List<complaintItem>();
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
 
                 //Checking if the complaints exist in cache
                 //retrieveing complaints if they do.
@@ -189,7 +199,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 List<User> users = (from u
                                     in context.Users
                                     orderby u.date descending
@@ -246,7 +256,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 int uid = Convert.ToInt32(id);
                 User user = (User)(from u
                                     in context.Users
@@ -307,7 +317,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 List<User> users = (from u
                                     in context.Users
                                     where u.userName == name
@@ -365,7 +375,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 
                 User user = (User)(from u
                                     in context.Users
@@ -426,7 +436,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 double pts = Convert.ToDouble(points);
                 List<User> users = (from u
                                     in context.Users
@@ -484,7 +494,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 
                 List<User> users = (from u
                                     in context.Users
@@ -542,7 +552,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 double pts = Convert.ToDouble(num);
                 List<User> users = (from u
                                     in context.Users
@@ -600,7 +610,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 int cid = Convert.ToInt32(userId);
                 List<Comment> comments = (from c
                                           in context.Comments
@@ -650,7 +660,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 int cid = Convert.ToInt32(userId);
                 List<Like> likes = (from c
                                           in context.Likes
@@ -700,7 +710,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 //Retrieving records from the database
                 int cid = Convert.ToInt32(userId);
                 List<Spam> spams = (from s
@@ -739,7 +749,7 @@ namespace CoreService.Controllers
             try
             {
                 logger.LogMethod("jo", "SaveSubscription", "Enter");
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 Subscription temp = new Subscription();
                 temp.subscribedToId = subscription.subscribedToId;
                 temp.subscriberId = subscription.subscriberId;
@@ -778,7 +788,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 int sid = Convert.ToInt32(id);
                 var innerquery = (from s
                                   in context.Subscriptions
@@ -838,7 +848,7 @@ namespace CoreService.Controllers
                     }
                 }
 
-                context = new socialcopsentity();
+                context = new SocialCopsEntities();
                 int sid = Convert.ToInt32(id);
                 var innerquery = (from s
                                   in context.Subscriptions

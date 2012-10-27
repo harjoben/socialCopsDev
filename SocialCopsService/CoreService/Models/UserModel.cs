@@ -253,6 +253,82 @@ namespace CoreService.Models
         }
         #endregion
 
+        #region city
+        private string _city;
+        public string city
+        {
+            get
+            {
+                return _city;
+            }
+            set
+            {
+                if (_city != value)
+                {
+                    _city = value;
+                    NotifyPropertyChanged("city");
+                }
+            }
+        }
+        #endregion
+
+        #region state
+        private string _state;
+        public string state
+        {
+            get
+            {
+                return _state;
+            }
+            set
+            {
+                if (_state != value)
+                {
+                    _state = value;
+                    NotifyPropertyChanged("state");
+                }
+            }
+        }
+        #endregion
+
+        #region country
+        private string _country;
+        public string country
+        {
+            get
+            {
+                return _country;
+            }
+            set
+            {
+                if (_country != value)
+                {
+                    _country = value;
+                    NotifyPropertyChanged("country");
+                }
+            }
+        }
+        #endregion
+
+        #region pincode
+        private string _pincode;
+        public string pincode
+        {
+            get
+            {
+                return _pincode;
+            }
+            set
+            {
+                if (_pincode != value)
+                {
+                    _pincode = value;
+                    NotifyPropertyChanged("pincode");
+                }
+            }
+        }
+        #endregion
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;
