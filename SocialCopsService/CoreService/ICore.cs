@@ -32,7 +32,7 @@ namespace CoreService
         [FaultContract(typeof(Error_Handling.Bug))]
         [WebInvoke(Method = "POST", UriTemplate = "ThirdPartyLogin",
            RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        bool ThirdPartyLogin(userItem user);
+        int ThirdPartyLogin(userItem user);
 
         [OperationContract]
         [FaultContract(typeof(Error_Handling.Bug))]

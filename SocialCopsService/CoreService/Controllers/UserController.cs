@@ -159,10 +159,11 @@ namespace CoreService.Controllers
                     {
                         return u.userId;
                     }
-                    return null;
+                    logger.LogMethod("jo", "thirdpartylogin", "Exit");
+                    return 0;
                 }
 
-                logger.LogMethod("jo", "thirdpartylogin", "Exit");
+                
                 
             }
             catch (Exception ex)

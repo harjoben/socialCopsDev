@@ -64,10 +64,10 @@ namespace CoreService
         #endregion
 
         #region thirdPartyLogin
-        public bool ThirdPartyLogin(userItem user)
+        public int ThirdPartyLogin(userItem user)
         {
             uc = new UserController();
-            bool result = uc.thirdPartyLogin(user);
+            int result = uc.thirdPartyLogin(user);
             return result;
         }
         #endregion
