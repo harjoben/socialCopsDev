@@ -119,7 +119,7 @@ namespace CoreService.Controllers
         #endregion
 
         #region thirdPartyLogin
-        public bool thirdPartyLogin(userItem user)
+        public int thirdPartyLogin(userItem user)
         {
             try
             {
@@ -150,10 +150,20 @@ namespace CoreService.Controllers
                     temp.date = System.DateTime.Now;
                     context.Users.Add(temp);
                     context.SaveChanges();
+                    return temp.userId;
+                }
+                else
+                {
+                    logger.LogMethod("jo", "thirdpartylogin", "Existing user");
+                    foreach (User u in users)
+                    {
+                        return u.userId;
+                    }
+                    return null;
                 }
 
                 logger.LogMethod("jo", "thirdpartylogin", "Exit");
-                return true;
+                
             }
             catch (Exception ex)
             {
@@ -195,6 +205,7 @@ namespace CoreService.Controllers
                                               orderby c.complaintDate descending
                                               select c).ToList();
 
+                list = new List<complaintItem>();
                 foreach (Complaint temp in complaints)
                 {
                     complaintItem complaint = new complaintItem();
@@ -254,6 +265,7 @@ namespace CoreService.Controllers
                     }
                 }
 
+                list = new List<userItem>();
                 context = new SocialCopsEntities();
                 List<User> users = (from u
                                     in context.Users
@@ -316,6 +328,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                temp = new userItem();
                 int uid = Convert.ToInt32(id);
                 User user = (User)(from u
                                     in context.Users
@@ -381,6 +394,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<userItem>();
                 List<User> users = (from u
                                     in context.Users
                                     where u.userName == name
@@ -443,7 +457,8 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
-                
+                temp = new userItem();
+
                 User user = (User)(from u
                                     in context.Users
                                    where u.email == email
@@ -508,6 +523,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<userItem>();
                 double pts = Convert.ToDouble(points);
                 List<User> users = (from u
                                     in context.Users
@@ -570,7 +586,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
-                
+                list = new List<userItem>();
                 List<User> users = (from u
                                     in context.Users
                                     where u.userRank == rank
@@ -632,7 +648,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
-
+                list = new List<userItem>();
                 List<User> users = (from u
                                     in context.Users
                                     where u.city == city
@@ -694,7 +710,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
-
+                list = new List<userItem>();
                 List<User> users = (from u
                                     in context.Users
                                     where u.state == state
@@ -756,7 +772,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
-
+                list = new List<userItem>();
                 List<User> users = (from u
                                     in context.Users
                                     where u.country == country
@@ -818,7 +834,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
-
+                list = new List<userItem>();
                 List<User> users = (from u
                                     in context.Users
                                     where u.pincode == pin
@@ -880,6 +896,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<userItem>();
                 double pts = Convert.ToDouble(num);
                 List<User> users = (from u
                                     in context.Users
@@ -942,6 +959,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<commentItem>();
                 int cid = Convert.ToInt32(userId);
                 List<Comment> comments = (from c
                                           in context.Comments
@@ -992,6 +1010,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<likeItem>();
                 int cid = Convert.ToInt32(userId);
                 List<Like> likes = (from c
                                           in context.Likes
@@ -1042,6 +1061,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<spamItem>();
                 //Retrieving records from the database
                 int cid = Convert.ToInt32(userId);
                 List<Spam> spams = (from s
@@ -1120,6 +1140,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<userItem>();
                 int sid = Convert.ToInt32(id);
                 var innerquery = (from s
                                   in context.Subscriptions
@@ -1184,6 +1205,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<userItem>();
                 int sid = Convert.ToInt32(id);
                 var innerquery = (from s
                                   in context.Subscriptions

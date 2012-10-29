@@ -34,7 +34,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<complaintItem>();
                 int aid = Convert.ToInt32(authId);
                 context = new SocialCopsEntities();
                 //Getting the complaintIds from jurisdiction table where id is authId
@@ -114,7 +114,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<authorityItem>();
                 context = new SocialCopsEntities();
                 List<Authority> auths = (from a
                                          in context.Authorities
@@ -177,7 +177,7 @@ namespace CoreService.Controllers
                         return temp;
                     }
                 }
-
+                temp = new authorityItem();
                 context = new SocialCopsEntities();
                 int aid = Convert.ToInt32(id);
                 List<Authority> auths = (from a
@@ -250,7 +250,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<authorityItem>();
                 context = new SocialCopsEntities();
                 List<Authority> auths = (from a
                                          in context.Authorities
@@ -313,7 +313,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<authorityItem>();
                 context = new SocialCopsEntities();
                 List<Authority> auths = (from a
                                          in context.Authorities
@@ -376,7 +376,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<authorityItem>();
                 context = new SocialCopsEntities();
                 List<Authority> auths = (from a
                                          in context.Authorities
@@ -439,7 +439,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<authorityItem>();
                 context = new SocialCopsEntities();
                 List<Authority> auths = (from a
                                          in context.Authorities
@@ -502,7 +502,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<authorityItem>();
                 context = new SocialCopsEntities();
                 List<Authority> auths = (from a
                                          in context.Authorities
@@ -566,7 +566,7 @@ namespace CoreService.Controllers
                         return temp;
                     }
                 }
-
+                temp = new authorityItem();
                 context = new SocialCopsEntities();
                 //int aid = Convert.ToInt32(id);
                 List<Authority> auths = (from a
@@ -639,7 +639,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<authorityItem>();
                 context = new SocialCopsEntities();
                 int pts = Convert.ToInt32(num);
                 List<Authority> auths = (from a
@@ -703,7 +703,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<authorityItem>();
                 context = new SocialCopsEntities();
                 int pts = Convert.ToInt32(num);
                 List<Authority> auths = (from a

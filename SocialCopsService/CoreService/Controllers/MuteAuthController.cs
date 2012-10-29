@@ -94,7 +94,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<muteAuthorityItem>();
                 context = new SocialCopsEntities();
                 List<MuteAuthority> muteAuths = (from a
                                          in context.MuteAuthorities
@@ -154,7 +154,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<muteAuthorityItem>();
                 context = new SocialCopsEntities();
                 int mid = Convert.ToInt32(id);
                 List<MuteAuthority> muteAuths = (from a
@@ -216,7 +216,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<muteAuthorityItem>();
                 context = new SocialCopsEntities();
                 List<MuteAuthority> muteAuths = (from a
                                                 in context.MuteAuthorities
@@ -277,7 +277,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<muteAuthorityItem>();
                 context = new SocialCopsEntities();
                 List<MuteAuthority> muteAuths = (from a
                                                 in context.MuteAuthorities
@@ -338,7 +338,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<muteAuthorityItem>();
                 context = new SocialCopsEntities();
                 List<MuteAuthority> muteAuths = (from a
                                                 in context.MuteAuthorities
@@ -399,7 +399,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<muteAuthorityItem>();
                 context = new SocialCopsEntities();
                 List<MuteAuthority> muteAuths = (from a
                                                 in context.MuteAuthorities
@@ -460,7 +460,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<muteAuthorityItem>();
                 context = new SocialCopsEntities();
                 List<MuteAuthority> muteAuths = (from a
                                                 in context.MuteAuthorities
@@ -521,7 +521,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<muteAuthorityItem>();
                 context = new SocialCopsEntities();
                 List<MuteAuthority> muteAuths = (from a
                                                 in context.MuteAuthorities

@@ -127,6 +127,7 @@ namespace CoreService.Controllers
                     }
                 }
 
+                list = new List<complaintItem>();
                 List<Complaint> complaints = (from c
                                               in context.Complaints
                                               orderby c.complaintDate descending
@@ -199,6 +200,7 @@ namespace CoreService.Controllers
                                               in context.Complaints
                                               where c.complaintId == cId
                                               select c).ToList();
+                temp = new complaintItem();
                 if (complaints.Count == 0)
                 {
                     error.Result = false;
@@ -269,7 +271,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<complaintItem>();
                 List<Complaint> complaints = (from c
                                               in context.Complaints
                                               where c.category == category
@@ -339,7 +341,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<complaintItem>();
                 List<Complaint> complaints = (from c
                                               in context.Complaints
                                               where c.complaintStatus == complaintStatus
@@ -409,7 +411,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<complaintItem>();
                 List<Complaint> complaints = (from c
                                               in context.Complaints
                                               where c.city == city
@@ -479,7 +481,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<complaintItem>();
                 List<Complaint> complaints = (from c
                                               in context.Complaints
                                               where c.state == state
@@ -549,7 +551,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<complaintItem>();
                 List<Complaint> complaints = (from c
                                               in context.Complaints
                                               where c.country == country
@@ -619,7 +621,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<complaintItem>();
                 List<Complaint> complaints = (from c
                                               in context.Complaints
                                               where c.pincode == pin
@@ -685,7 +687,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<commentItem>();
                 context = new SocialCopsEntities();
                 int cid = Convert.ToInt32(complaintId);
                 List<Comment> comments = (from c
@@ -735,7 +737,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<likeItem>();
                 context = new SocialCopsEntities();
                 int cid = Convert.ToInt32(complaintId);
                 List<Like> likes = (from c
@@ -839,7 +841,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<spamItem>();
                 context = new SocialCopsEntities();
                 //Retrieving records from the database
                 int cid = Convert.ToInt32(complaintId);
