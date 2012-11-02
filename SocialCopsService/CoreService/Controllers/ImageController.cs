@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure;
+﻿using CoreService.Models;
+using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
 using System;
 using System.Collections.Generic;
@@ -13,54 +14,29 @@ namespace CoreService.Controllers
 {
     public class ImageController
     {
-        ImageHelper helper = new ImageHelper();
-        public string SavePicture(byte[] picture, string pictureName)
+        private static ImageHelper helper = new ImageHelper();
+        public static string[] SavePicture(byte[] Image,string id)
         {
 
+            string[] asyncResult = new string[2];
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
             // Retrieve a reference to a container 
             CloudBlobContainer container =
                 blobClient.GetContainerReference("pictures");
             container.CreateIfNotExist();
-            string uniqueBlobName = string.Format("{0}{1}.jpg", pictureName,"original");
+            string uniqueBlobName = string.Format("{0}{1}.jpg",id,"original");
             CloudBlob blob = container.GetBlobReference(uniqueBlobName);
             // Create or overwrite the blob with content
-            var ms = new MemoryStream(picture);
+            var ms = new MemoryStream(Image);
             blob.UploadFromStream(ms);
-            string url = blob.Uri.OriginalString;
+            asyncResult[0] = blob.Uri.OriginalString;
+            asyncResult[1] = id;
             ms.Close();
-            blob=container.GetBlobReference(uniqueBlobName
-            return url;
+            return asyncResult;
         }
 
-        public static Image ResizeImage(Image image, Size size,bool preserveAspectRatio = true)
-        {
-            int newWidth;
-            int newHeight;
-            if (preserveAspectRatio)
-            {
-                int originalWidth = image.Width;
-                int originalHeight = image.Height;
-                float percentWidth = (float)size.Width / (float)originalWidth;
-                float percentHeight = (float)size.Height / (float)originalHeight;
-                float percent = percentHeight < percentWidth ? percentHeight : percentWidth;
-                newWidth = (int)(originalWidth * percent);
-                newHeight = (int)(originalHeight * percent);
-            }
-            else
-            {
-                newWidth = size.Width;
-                newHeight = size.Height;
-            }
-            Image newImage = new Bitmap(newWidth, newHeight);
-            using (Graphics graphicsHandle = Graphics.FromImage(newImage))
-            {
-                graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphicsHandle.DrawImage(image, 0, 0, newWidth, newHeight);
-            }
-            return newImage;
-        }
+    
 
     }
 }

@@ -7,7 +7,7 @@ using System.Web;
 namespace CoreService.Error_Handling
 {
     [DataContract]
-    public class Log
+    public class logItem
     {
         [DataMember]
         public string UserName { get; set; }

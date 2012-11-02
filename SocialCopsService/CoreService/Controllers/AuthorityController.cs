@@ -34,7 +34,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<complaintItem>();
                 int aid = Convert.ToInt32(authId);
                 context = new SocialCopsEntities();
                 //Getting the complaintIds from jurisdiction table where id is authId
@@ -73,7 +73,12 @@ namespace CoreService.Controllers
                     complaint.complaintStatus = temp.complaintStatus;
                     complaint.date = temp.date;
                     complaint.isAnonymous = temp.isAnonymous;
-                    
+                    complaint.thumbImage1 = temp.thumbImage1;
+                    complaint.thumbImage2 = temp.thumbImage2;
+                    complaint.city = temp.city;
+                    complaint.country = temp.country;
+                    complaint.state = temp.state;
+                    complaint.pincode = temp.pincode;
 
                     list.Add(complaint);
                 }
@@ -88,25 +93,6 @@ namespace CoreService.Controllers
                 error.Result = true;
                 logger.LogMethod("jo", "GetComplaintsByAuthId", ex.Message);
                 throw new FaultException<Bug>(error, ex.Message);
-            }
-        }
-        #endregion
-
-        #region SaveAuth
-        public bool SaveAuth(authorityItem auth)
-        {
-            try
-            {
-                logger.LogMethod("jo", "SaveAuth", "Enter");
-                return false;
-            }
-            catch (Exception ex)
-            {
-                error.Result = false;
-                error.ErrorMessage = "Something happened. Sorry";
-                error.ErrorDetails = ex.Message.ToString();
-                logger.LogMethod("jo", "SaveAuth", ex.Message.ToString());
-                throw new FaultException<Bug>(error, ex.Message.ToString());
             }
         }
         #endregion
@@ -128,7 +114,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<authorityItem>();
                 context = new SocialCopsEntities();
                 List<Authority> auths = (from a
                                          in context.Authorities
@@ -151,6 +137,10 @@ namespace CoreService.Controllers
                     temp.profilePic = auth.profilePic;
                     temp.flag = (int)auth.flag;
                     temp.date = auth.date;
+                    temp.city = auth.city;
+                    temp.state = auth.state;
+                    temp.country = auth.country;
+                    temp.pincode = auth.pincode;
                     list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, list);
@@ -187,7 +177,7 @@ namespace CoreService.Controllers
                         return temp;
                     }
                 }
-
+                temp = new authorityItem();
                 context = new SocialCopsEntities();
                 int aid = Convert.ToInt32(id);
                 List<Authority> auths = (from a
@@ -221,6 +211,10 @@ namespace CoreService.Controllers
                     temp.profilePic = auth.profilePic;
                     temp.flag = (int)auth.flag;
                     temp.date = auth.date;
+                    temp.city = auth.city;
+                    temp.state = auth.state;
+                    temp.country = auth.country;
+                    temp.pincode = auth.pincode;
                     //list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, temp);
@@ -256,7 +250,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<authorityItem>();
                 context = new SocialCopsEntities();
                 List<Authority> auths = (from a
                                          in context.Authorities
@@ -280,6 +274,10 @@ namespace CoreService.Controllers
                     temp.profilePic = auth.profilePic;
                     temp.flag = (int)auth.flag;
                     temp.date = auth.date;
+                    temp.city = auth.city;
+                    temp.state = auth.state;
+                    temp.country = auth.country;
+                    temp.pincode = auth.pincode;
                     list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, list);
@@ -293,6 +291,258 @@ namespace CoreService.Controllers
                 error.ErrorMessage = "Something happened. Sorry.";
                 error.Result = false;
                 logger.LogMethod("jo", "GetAuthsByName", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
+            }
+        }
+        #endregion
+
+        #region GetAuthsByCity/{city}
+        public authorityItem[] GetAuthsByCity(string city)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetAuthsByCity", "Enter");
+                List<authorityItem> list = new List<authorityItem>();
+                key = city + "GetAuthsByCity";
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<authorityItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetAuthsByCity", "Cache found");
+                        return list.ToArray();
+                    }
+                }
+                list = new List<authorityItem>();
+                context = new SocialCopsEntities();
+                List<Authority> auths = (from a
+                                         in context.Authorities
+                                         where a.city == city
+                                         orderby a.date descending
+                                         select a).ToList();
+
+                foreach (Authority auth in auths)
+                {
+                    authorityItem temp = new authorityItem();
+                    temp.authId = auth.authId;
+                    temp.authName = auth.authName;
+                    temp.authAddress = auth.authAddress;
+                    temp.email = auth.email;
+                    temp.phone = Convert.ToInt32(auth.phone);
+                    temp.numPending = (int)auth.numPending;
+                    temp.numResolved = (int)auth.numResolved;
+                    temp.latitude = temp.latitude;
+                    temp.longitude = temp.longitude;
+                    temp.website = auth.website;
+                    temp.profilePic = auth.profilePic;
+                    temp.flag = (int)auth.flag;
+                    temp.date = auth.date;
+                    temp.city = auth.city;
+                    temp.state = auth.state;
+                    temp.country = auth.country;
+                    temp.pincode = auth.pincode;
+                    list.Add(temp);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetAuthsByCity", "Exit");
+                return list.ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                error.ErrorDetails = ex.Message.ToString();
+                error.ErrorMessage = "Something happened. Sorry.";
+                error.Result = false;
+                logger.LogMethod("jo", "GetAuthsByCity", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
+            }
+        }
+        #endregion
+
+        #region GetAuthsByState/{state}
+        public authorityItem[] GetAuthsByState(string state)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetAuthsByState", "Enter");
+                List<authorityItem> list = new List<authorityItem>();
+                key = state + "GetAuthsByState";
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<authorityItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetAuthsByState", "Cache found");
+                        return list.ToArray();
+                    }
+                }
+                list = new List<authorityItem>();
+                context = new SocialCopsEntities();
+                List<Authority> auths = (from a
+                                         in context.Authorities
+                                         where a.state == state
+                                         orderby a.date descending
+                                         select a).ToList();
+
+                foreach (Authority auth in auths)
+                {
+                    authorityItem temp = new authorityItem();
+                    temp.authId = auth.authId;
+                    temp.authName = auth.authName;
+                    temp.authAddress = auth.authAddress;
+                    temp.email = auth.email;
+                    temp.phone = Convert.ToInt32(auth.phone);
+                    temp.numPending = (int)auth.numPending;
+                    temp.numResolved = (int)auth.numResolved;
+                    temp.latitude = temp.latitude;
+                    temp.longitude = temp.longitude;
+                    temp.website = auth.website;
+                    temp.profilePic = auth.profilePic;
+                    temp.flag = (int)auth.flag;
+                    temp.date = auth.date;
+                    temp.city = auth.city;
+                    temp.state = auth.state;
+                    temp.country = auth.country;
+                    temp.pincode = auth.pincode;
+                    list.Add(temp);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetAuthsByState", "Exit");
+                return list.ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                error.ErrorDetails = ex.Message.ToString();
+                error.ErrorMessage = "Something happened. Sorry.";
+                error.Result = false;
+                logger.LogMethod("jo", "GetAuthsByState", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
+            }
+        }
+        #endregion
+
+        #region GetAuthsByCountry/{country}
+        public authorityItem[] GetAuthsByCountry(string country)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetAuthsByCountry", "Enter");
+                List<authorityItem> list = new List<authorityItem>();
+                key = country + "GetAuthsByCountry";
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<authorityItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetAuthsByCountry", "Cache found");
+                        return list.ToArray();
+                    }
+                }
+                list = new List<authorityItem>();
+                context = new SocialCopsEntities();
+                List<Authority> auths = (from a
+                                         in context.Authorities
+                                         where a.country == country
+                                         orderby a.date descending
+                                         select a).ToList();
+
+                foreach (Authority auth in auths)
+                {
+                    authorityItem temp = new authorityItem();
+                    temp.authId = auth.authId;
+                    temp.authName = auth.authName;
+                    temp.authAddress = auth.authAddress;
+                    temp.email = auth.email;
+                    temp.phone = Convert.ToInt32(auth.phone);
+                    temp.numPending = (int)auth.numPending;
+                    temp.numResolved = (int)auth.numResolved;
+                    temp.latitude = temp.latitude;
+                    temp.longitude = temp.longitude;
+                    temp.website = auth.website;
+                    temp.profilePic = auth.profilePic;
+                    temp.flag = (int)auth.flag;
+                    temp.date = auth.date;
+                    temp.city = auth.city;
+                    temp.state = auth.state;
+                    temp.country = auth.country;
+                    temp.pincode = auth.pincode;
+                    list.Add(temp);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetAuthsByCountry", "Exit");
+                return list.ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                error.ErrorDetails = ex.Message.ToString();
+                error.ErrorMessage = "Something happened. Sorry.";
+                error.Result = false;
+                logger.LogMethod("jo", "GetAuthsByCountry", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
+            }
+        }
+        #endregion
+
+        #region GetAuthsByPin/{pin}
+        public authorityItem[] GetAuthsByPin(string pin)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetAuthsByPin", "Enter");
+                List<authorityItem> list = new List<authorityItem>();
+                key = pin + "GetAuthsByPin";
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<authorityItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetAuthsByPin", "Cache found");
+                        return list.ToArray();
+                    }
+                }
+                list = new List<authorityItem>();
+                context = new SocialCopsEntities();
+                List<Authority> auths = (from a
+                                         in context.Authorities
+                                         where a.pincode == pin
+                                         orderby a.date descending
+                                         select a).ToList();
+
+                foreach (Authority auth in auths)
+                {
+                    authorityItem temp = new authorityItem();
+                    temp.authId = auth.authId;
+                    temp.authName = auth.authName;
+                    temp.authAddress = auth.authAddress;
+                    temp.email = auth.email;
+                    temp.phone = Convert.ToInt32(auth.phone);
+                    temp.numPending = (int)auth.numPending;
+                    temp.numResolved = (int)auth.numResolved;
+                    temp.latitude = temp.latitude;
+                    temp.longitude = temp.longitude;
+                    temp.website = auth.website;
+                    temp.profilePic = auth.profilePic;
+                    temp.flag = (int)auth.flag;
+                    temp.date = auth.date;
+                    temp.city = auth.city;
+                    temp.state = auth.state;
+                    temp.country = auth.country;
+                    temp.pincode = auth.pincode;
+                    list.Add(temp);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetAuthsByPin", "Exit");
+                return list.ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                error.ErrorDetails = ex.Message.ToString();
+                error.ErrorMessage = "Something happened. Sorry.";
+                error.Result = false;
+                logger.LogMethod("jo", "GetAuthsByPin", ex.Message.ToString());
                 throw new FaultException<Bug>(error, ex.Message.ToString());
             }
         }
@@ -316,7 +566,7 @@ namespace CoreService.Controllers
                         return temp;
                     }
                 }
-
+                temp = new authorityItem();
                 context = new SocialCopsEntities();
                 //int aid = Convert.ToInt32(id);
                 List<Authority> auths = (from a
@@ -350,6 +600,10 @@ namespace CoreService.Controllers
                     temp.profilePic = auth.profilePic;
                     temp.flag = (int)auth.flag;
                     temp.date = auth.date;
+                    temp.city = auth.city;
+                    temp.state = auth.state;
+                    temp.country = auth.country;
+                    temp.pincode = auth.pincode;
                     //list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, temp);
@@ -385,7 +639,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<authorityItem>();
                 context = new SocialCopsEntities();
                 int pts = Convert.ToInt32(num);
                 List<Authority> auths = (from a
@@ -410,6 +664,10 @@ namespace CoreService.Controllers
                     temp.profilePic = auth.profilePic;
                     temp.flag = (int)auth.flag;
                     temp.date = auth.date;
+                    temp.city = auth.city;
+                    temp.state = auth.state;
+                    temp.country = auth.country;
+                    temp.pincode = auth.pincode;
                     list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, list);
@@ -445,7 +703,7 @@ namespace CoreService.Controllers
                         return list.ToArray();
                     }
                 }
-
+                list = new List<authorityItem>();
                 context = new SocialCopsEntities();
                 int pts = Convert.ToInt32(num);
                 List<Authority> auths = (from a
@@ -470,6 +728,10 @@ namespace CoreService.Controllers
                     temp.profilePic = auth.profilePic;
                     temp.flag = (int)auth.flag;
                     temp.date = auth.date;
+                    temp.city = auth.city;
+                    temp.state = auth.state;
+                    temp.country = auth.country;
+                    temp.pincode = auth.pincode;
                     list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, list);

@@ -8,13 +8,17 @@ namespace CoreService.Error_Handling
     public class Logger
     {
         private static Log log = new Log();
-
-        public void LogMethod(string username,string method,string message,params object[] parameters)
+        SocialCopsEntities context;
+        public Log LogMethod(string username,string method,string message,params object[] parameters)
         {
-            log.UserName = username;
-            log.MethodName = method;
-            log.Message = message;
-            log.Parameters = parameters;
+            context = new SocialCopsEntities();
+            log.username = username;
+            log.logDetails = method;
+            log.logMessage = message;
+            log.date = DateTime.Now;
+            context.Logs.Add(log);
+            context.SaveChanges();
+            return log;
         }
 
     }

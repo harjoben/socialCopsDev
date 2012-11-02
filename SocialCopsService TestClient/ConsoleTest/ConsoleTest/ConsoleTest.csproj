@@ -44,6 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logger.cs" />
+    <Compile Include="Models\AuthorityModel.cs" />
+    <Compile Include="Models\CommentModel.cs" />
+    <Compile Include="Models\ComplaintModel.cs" />
+    <Compile Include="Models\JurisdictionModel.cs" />
+    <Compile Include="Models\LikeModel.cs" />
+    <Compile Include="Models\SpamModel.cs" />
+    <Compile Include="Models\SubscriptionModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\CoreService\Reference.cs">
@@ -54,19 +62,171 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetAuthByEmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetAuthByIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetAuthsByCityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetAuthsByCountryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetAuthsByNameResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetAuthsByPendingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetAuthsByPinResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetAuthsBySolvedResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetAuthsByStateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetAuthsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetCommentsByUserIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetCommentsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetComplaintsByAuthIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetComplaintsByCategoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetComplaintsByCityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetComplaintsByCountryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetComplaintsByIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetComplaintsByPinResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetComplaintsByStateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetComplaintsByStatusResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetComplaintsByUserIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetComplaintsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetLikesByUserIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetLikesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetMuteAuthsByCityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetMuteAuthsByCountryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetMuteAuthsByEmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetMuteAuthsByIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetMuteAuthsByNameResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetMuteAuthsByPinResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetMuteAuthsByStateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetMuteAuthsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetSpamByUserIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetSpamResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetSubscribedToResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetSubscribersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetUserByEmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetUserByIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetUsersByCityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetUsersByComplaintsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetUsersByCountryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetUsersByNameResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetUsersByPinResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetUsersByPointsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetUsersByRankResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetUsersByStateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.GetUsersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.SaveCommentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.SaveComplaintResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.SaveLikeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.SaveMuteAuthResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.SaveSpamResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.SaveSubscriptionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.SaveUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\CoreService\ConsoleTest.CoreService.TestConnectionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\CoreService\Core.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\CoreService\Core1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\CoreService\Core2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\CoreService\Service1.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -75,19 +235,35 @@
     <WCFMetadataStorage Include="Service References\CoreService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\CoreService\Core.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\CoreService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\CoreService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\CoreService\ConsoleTest.CoreService.ThirdPartyLoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CoreService\Core1.wsdl" />
+    <None Include="Service References\CoreService\Core31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CoreService\Core32.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CoreService\Core33.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CoreService\Core34.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\CoreService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CoreService\Core1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

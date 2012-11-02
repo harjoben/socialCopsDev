@@ -52,6 +52,10 @@ namespace CoreService.Controllers
                 temp.userRank = "Cadet";
                 temp.webURI = user.webUri;
                 temp.pwd = user.pwd;
+                temp.city = user.city;
+                temp.state = user.state;
+                temp.country = user.country;
+                temp.pincode = user.pincode;
                 temp.date = System.DateTime.Now;
                 context.Users.Add(temp);
                 context.SaveChanges();
@@ -75,8 +79,47 @@ namespace CoreService.Controllers
         }
         #endregion
 
+        #region SaveProfilePic
+        public bool SaveProfilePic(int id, string url)
+        {
+            try
+            {
+                logger.LogMethod("jo", "SaveProfilePic", "Enter", null);
+                context = new SocialCopsEntities();
+
+
+                User temp = new User();
+                temp = (User)(from c
+                                    in context.Users
+                                   where c.userId == id
+                                   select c);
+
+                if (temp == null)
+                {
+                    error.Result = false;
+                    error.ErrorMessage = "Invalid user Id.";
+                    error.ErrorDetails = "The user does not exist.";
+                    throw new FaultException<Bug>(error);
+                }
+
+                temp.profilePic = url;
+                context.SaveChanges();
+
+                logger.LogMethod("jo", "SaveProfilePic", "Exit", null);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                error.Result = false;
+                error.ErrorMessage = "unforeseen error occured. Please try later.";
+                error.ErrorDetails = ex.ToString();
+                throw new FaultException<Bug>(error, ex.ToString());
+            }
+        }
+        #endregion
+
         #region thirdPartyLogin
-        public bool thirdPartyLogin(userItem user)
+        public int thirdPartyLogin(userItem user)
         {
             try
             {
@@ -92,18 +135,36 @@ namespace CoreService.Controllers
                     User temp = new User();
                     temp.userName = user.userName;
                     temp.email = user.email;
-                    temp.phoneURI = user.phoneUri;
-                    temp.date = System.DateTime.Now;
                     temp.phone = user.phone.ToString();
-                    temp.points = 0;
+                    temp.phoneURI = user.phoneUri;
                     temp.profilePic = user.profilePic;
                     temp.userAddress = user.userAddress;
+                    temp.points = 0;
+                    temp.userRank = "Cadet";
+                    temp.webURI = user.webUri;
+                    temp.pwd = user.pwd;
+                    temp.city = user.city;
+                    temp.state = user.state;
+                    temp.country = user.country;
+                    temp.pincode = user.pincode;
+                    temp.date = System.DateTime.Now;
                     context.Users.Add(temp);
                     context.SaveChanges();
+                    return temp.userId;
+                }
+                else
+                {
+                    logger.LogMethod("jo", "thirdpartylogin", "Existing user");
+                    foreach (User u in users)
+                    {
+                        return u.userId;
+                    }
+                    logger.LogMethod("jo", "thirdpartylogin", "Exit");
+                    return 0;
                 }
 
-                logger.LogMethod("jo", "thirdpartylogin", "Exit");
-                return true;
+                
+                
             }
             catch (Exception ex)
             {
@@ -145,6 +206,7 @@ namespace CoreService.Controllers
                                               orderby c.complaintDate descending
                                               select c).ToList();
 
+                list = new List<complaintItem>();
                 foreach (Complaint temp in complaints)
                 {
                     complaintItem complaint = new complaintItem();
@@ -163,7 +225,12 @@ namespace CoreService.Controllers
                     complaint.complaintStatus = temp.complaintStatus;
                     complaint.date = temp.date;
                     complaint.isAnonymous = temp.isAnonymous;
-
+                    complaint.city = temp.city;
+                    complaint.state = temp.state;
+                    complaint.country = temp.country;
+                    complaint.pincode = temp.pincode;
+                    complaint.thumbImage1 = temp.thumbImage1;
+                    complaint.thumbImage2 = temp.thumbImage2;
                     list.Add(complaint);
                 }
                 Cache.Cache.AddToCache(key, list);
@@ -199,6 +266,7 @@ namespace CoreService.Controllers
                     }
                 }
 
+                list = new List<userItem>();
                 context = new SocialCopsEntities();
                 List<User> users = (from u
                                     in context.Users
@@ -218,8 +286,12 @@ namespace CoreService.Controllers
                     temp.profilePic = user.profilePic;
                     temp.webUri = user.webURI;
                     temp.phoneUri = user.phoneURI;
-                    temp.numComplaints = (int)user.numComplaints;
+                    temp.numComplaints = 0;
                     temp.date = user.date;
+                    temp.city = user.city;
+                    temp.state = user.state;
+                    temp.country = user.country;
+                    temp.pincode = user.pincode;
                     list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, list);
@@ -257,6 +329,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                temp = new userItem();
                 int uid = Convert.ToInt32(id);
                 User user = (User)(from u
                                     in context.Users
@@ -270,7 +343,7 @@ namespace CoreService.Controllers
                     logger.LogMethod("jo", "GetUserById", "User doesn't exist");
                     throw new FaultException<Bug>(error);
                 }
-                    
+
                 temp.userId = user.userId;
                 temp.userName = user.userName;
                 temp.email = user.email;
@@ -283,6 +356,10 @@ namespace CoreService.Controllers
                 temp.phoneUri = user.phoneURI;
                 temp.numComplaints = (int)user.numComplaints;
                 temp.date = user.date;
+                temp.city = user.city;
+                temp.state = user.state;
+                temp.country = user.country;
+                temp.pincode = user.pincode;
                 
                 Cache.Cache.AddToCache(key, temp);
                 logger.LogMethod("jo", "GetUserById", "Exit");
@@ -318,6 +395,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<userItem>();
                 List<User> users = (from u
                                     in context.Users
                                     where u.userName == name
@@ -339,6 +417,10 @@ namespace CoreService.Controllers
                     temp.phoneUri = user.phoneURI;
                     temp.numComplaints = (int)user.numComplaints;
                     temp.date = user.date;
+                    temp.city = user.city;
+                    temp.state = user.state;
+                    temp.country = user.country;
+                    temp.pincode = user.pincode;
                     list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, list);
@@ -376,7 +458,8 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
-                
+                temp = new userItem();
+
                 User user = (User)(from u
                                     in context.Users
                                    where u.email == email
@@ -402,6 +485,10 @@ namespace CoreService.Controllers
                 temp.phoneUri = user.phoneURI;
                 temp.numComplaints = (int)user.numComplaints;
                 temp.date = user.date;
+                temp.city = user.city;
+                temp.state = user.state;
+                temp.country = user.country;
+                temp.pincode = user.pincode;
 
                 Cache.Cache.AddToCache(key, temp);
                 logger.LogMethod("jo", "GetUserByEmail", "Exit");
@@ -437,6 +524,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<userItem>();
                 double pts = Convert.ToDouble(points);
                 List<User> users = (from u
                                     in context.Users
@@ -459,6 +547,10 @@ namespace CoreService.Controllers
                     temp.phoneUri = user.phoneURI;
                     temp.numComplaints = (int)user.numComplaints;
                     temp.date = user.date;
+                    temp.city = user.city;
+                    temp.state = user.state;
+                    temp.country = user.country;
+                    temp.pincode = user.pincode;
                     list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, list);
@@ -495,7 +587,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
-                
+                list = new List<userItem>();
                 List<User> users = (from u
                                     in context.Users
                                     where u.userRank == rank
@@ -517,6 +609,10 @@ namespace CoreService.Controllers
                     temp.phoneUri = user.phoneURI;
                     temp.numComplaints = (int)user.numComplaints;
                     temp.date = user.date;
+                    temp.city = user.city;
+                    temp.state = user.state;
+                    temp.country = user.country;
+                    temp.pincode = user.pincode;
                     list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, list);
@@ -529,6 +625,254 @@ namespace CoreService.Controllers
                 error.ErrorDetails = ex.Message.ToString();
                 error.Result = false;
                 logger.LogMethod("jo", "GetUsersByRank", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
+            }
+        }
+        #endregion
+
+        #region GetUsersByCity/{city}
+        public userItem[] GetUsersByCity(string city)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetUsersByCity", "Enter");
+                List<userItem> list = new List<userItem>();
+                key = city + "GetUsersByCity";
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<userItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetUsersByCity", "Cache Found");
+                        return list.ToArray();
+                    }
+                }
+
+                context = new SocialCopsEntities();
+                list = new List<userItem>();
+                List<User> users = (from u
+                                    in context.Users
+                                    where u.city == city
+                                    orderby u.points descending
+                                    select u).ToList();
+
+                foreach (User user in users)
+                {
+                    userItem temp = new userItem();
+                    temp.userId = user.userId;
+                    temp.userName = user.userName;
+                    temp.email = user.email;
+                    temp.phone = Convert.ToInt32(user.phone);
+                    temp.userAddress = user.userAddress;
+                    temp.points = (float)user.points;
+                    temp.userRank = user.userRank;
+                    temp.profilePic = user.profilePic;
+                    temp.webUri = user.webURI;
+                    temp.phoneUri = user.phoneURI;
+                    temp.numComplaints = (int)user.numComplaints;
+                    temp.date = user.date;
+                    temp.city = user.city;
+                    temp.state = user.state;
+                    temp.country = user.country;
+                    temp.pincode = user.pincode;
+                    list.Add(temp);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetUsersByCity", "Exit");
+                return list.ToArray();
+            }
+            catch (Exception ex)
+            {
+                error.ErrorMessage = "Something happened. Sorry.";
+                error.ErrorDetails = ex.Message.ToString();
+                error.Result = false;
+                logger.LogMethod("jo", "GetUsersByCity", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
+            }
+        }
+        #endregion
+
+        #region GetUsersByState/{state}
+        public userItem[] GetUsersByState(string state)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetUsersByState", "Enter");
+                List<userItem> list = new List<userItem>();
+                key = state + "GetUsersByState";
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<userItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetUsersByState", "Cache Found");
+                        return list.ToArray();
+                    }
+                }
+
+                context = new SocialCopsEntities();
+                list = new List<userItem>();
+                List<User> users = (from u
+                                    in context.Users
+                                    where u.state == state
+                                    orderby u.points descending
+                                    select u).ToList();
+
+                foreach (User user in users)
+                {
+                    userItem temp = new userItem();
+                    temp.userId = user.userId;
+                    temp.userName = user.userName;
+                    temp.email = user.email;
+                    temp.phone = Convert.ToInt32(user.phone);
+                    temp.userAddress = user.userAddress;
+                    temp.points = (float)user.points;
+                    temp.userRank = user.userRank;
+                    temp.profilePic = user.profilePic;
+                    temp.webUri = user.webURI;
+                    temp.phoneUri = user.phoneURI;
+                    temp.numComplaints = (int)user.numComplaints;
+                    temp.date = user.date;
+                    temp.city = user.city;
+                    temp.state = user.state;
+                    temp.country = user.country;
+                    temp.pincode = user.pincode;
+                    list.Add(temp);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetUsersByState", "Exit");
+                return list.ToArray();
+            }
+            catch (Exception ex)
+            {
+                error.ErrorMessage = "Something happened. Sorry.";
+                error.ErrorDetails = ex.Message.ToString();
+                error.Result = false;
+                logger.LogMethod("jo", "GetUsersByState", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
+            }
+        }
+        #endregion
+
+        #region GetUsersByCountry/{country}
+        public userItem[] GetUsersByCountry(string country)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetUsersByCountry", "Enter");
+                List<userItem> list = new List<userItem>();
+                key = country + "GetUsersByCountry";
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<userItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetUsersByCountry", "Cache Found");
+                        return list.ToArray();
+                    }
+                }
+
+                context = new SocialCopsEntities();
+                list = new List<userItem>();
+                List<User> users = (from u
+                                    in context.Users
+                                    where u.country == country
+                                    orderby u.points descending
+                                    select u).ToList();
+
+                foreach (User user in users)
+                {
+                    userItem temp = new userItem();
+                    temp.userId = user.userId;
+                    temp.userName = user.userName;
+                    temp.email = user.email;
+                    temp.phone = Convert.ToInt32(user.phone);
+                    temp.userAddress = user.userAddress;
+                    temp.points = (float)user.points;
+                    temp.userRank = user.userRank;
+                    temp.profilePic = user.profilePic;
+                    temp.webUri = user.webURI;
+                    temp.phoneUri = user.phoneURI;
+                    temp.numComplaints = (int)user.numComplaints;
+                    temp.date = user.date;
+                    temp.city = user.city;
+                    temp.state = user.state;
+                    temp.country = user.country;
+                    temp.pincode = user.pincode;
+                    list.Add(temp);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetUsersByCountry", "Exit");
+                return list.ToArray();
+            }
+            catch (Exception ex)
+            {
+                error.ErrorMessage = "Something happened. Sorry.";
+                error.ErrorDetails = ex.Message.ToString();
+                error.Result = false;
+                logger.LogMethod("jo", "GetUsersByCountry", ex.Message.ToString());
+                throw new FaultException<Bug>(error, ex.Message.ToString());
+            }
+        }
+        #endregion
+
+        #region GetUsersByPin/{pin}
+        public userItem[] GetUsersByPin(string pin)
+        {
+            try
+            {
+                logger.LogMethod("jo", "GetUsersByPin", "Enter");
+                List<userItem> list = new List<userItem>();
+                key = pin + "GetUsersByPin";
+                if (CachingConfig.CachingEnabled)
+                {
+                    list = (List<userItem>)WCFCache.Current[key];
+                    if (list != null)
+                    {
+                        logger.LogMethod("jo", "GetUsersByPin", "Cache Found");
+                        return list.ToArray();
+                    }
+                }
+
+                context = new SocialCopsEntities();
+                list = new List<userItem>();
+                List<User> users = (from u
+                                    in context.Users
+                                    where u.pincode == pin
+                                    orderby u.points descending
+                                    select u).ToList();
+
+                foreach (User user in users)
+                {
+                    userItem temp = new userItem();
+                    temp.userId = user.userId;
+                    temp.userName = user.userName;
+                    temp.email = user.email;
+                    temp.phone = Convert.ToInt32(user.phone);
+                    temp.userAddress = user.userAddress;
+                    temp.points = (float)user.points;
+                    temp.userRank = user.userRank;
+                    temp.profilePic = user.profilePic;
+                    temp.webUri = user.webURI;
+                    temp.phoneUri = user.phoneURI;
+                    temp.numComplaints = (int)user.numComplaints;
+                    temp.date = user.date;
+                    temp.city = user.city;
+                    temp.state = user.state;
+                    temp.country = user.country;
+                    temp.pincode = user.pincode;
+                    list.Add(temp);
+                }
+                Cache.Cache.AddToCache(key, list);
+                logger.LogMethod("jo", "GetUsersByPin", "Exit");
+                return list.ToArray();
+            }
+            catch (Exception ex)
+            {
+                error.ErrorMessage = "Something happened. Sorry.";
+                error.ErrorDetails = ex.Message.ToString();
+                error.Result = false;
+                logger.LogMethod("jo", "GetUsersByPin", ex.Message.ToString());
                 throw new FaultException<Bug>(error, ex.Message.ToString());
             }
         }
@@ -553,6 +897,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<userItem>();
                 double pts = Convert.ToDouble(num);
                 List<User> users = (from u
                                     in context.Users
@@ -575,6 +920,10 @@ namespace CoreService.Controllers
                     temp.phoneUri = user.phoneURI;
                     temp.numComplaints = (int)user.numComplaints;
                     temp.date = user.date;
+                    temp.city = user.city;
+                    temp.state = user.state;
+                    temp.country = user.country;
+                    temp.pincode = user.pincode;
                     list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, list);
@@ -611,6 +960,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<commentItem>();
                 int cid = Convert.ToInt32(userId);
                 List<Comment> comments = (from c
                                           in context.Comments
@@ -661,6 +1011,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<likeItem>();
                 int cid = Convert.ToInt32(userId);
                 List<Like> likes = (from c
                                           in context.Likes
@@ -711,6 +1062,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<spamItem>();
                 //Retrieving records from the database
                 int cid = Convert.ToInt32(userId);
                 List<Spam> spams = (from s
@@ -789,6 +1141,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<userItem>();
                 int sid = Convert.ToInt32(id);
                 var innerquery = (from s
                                   in context.Subscriptions
@@ -813,6 +1166,10 @@ namespace CoreService.Controllers
                     temp.phoneUri = user.phoneURI;
                     temp.numComplaints = (int)user.numComplaints;
                     temp.date = user.date;
+                    temp.city = user.city;
+                    temp.state = user.state;
+                    temp.country = user.country;
+                    temp.pincode = user.pincode;
                     list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, list);
@@ -849,6 +1206,7 @@ namespace CoreService.Controllers
                 }
 
                 context = new SocialCopsEntities();
+                list = new List<userItem>();
                 int sid = Convert.ToInt32(id);
                 var innerquery = (from s
                                   in context.Subscriptions
@@ -873,6 +1231,10 @@ namespace CoreService.Controllers
                     temp.phoneUri = user.phoneURI;
                     temp.numComplaints = (int)user.numComplaints;
                     temp.date = user.date;
+                    temp.city = user.city;
+                    temp.state = user.state;
+                    temp.country = user.country;
+                    temp.pincode = user.pincode;
                     list.Add(temp);
                 }
                 Cache.Cache.AddToCache(key, list);

@@ -109,6 +109,21 @@ namespace ConsoleTest
             }
         }
 
+        public void GetComplaints()
+        {
+            WebClient client = new WebClient();
+            byte[] data = client.DownloadData("http://127.0.0.1/Core.svc/GetComplaintsByCategory/pothole");
+            MemoryStream stream = new MemoryStream(data);
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ConsoleTest.Models.complaintItem[]));
+            ConsoleTest.Models.complaintItem[] user = (ConsoleTest.Models.complaintItem[])serializer.ReadObject(stream);
+            foreach (ConsoleTest.Models.complaintItem item in user)
+            {
+                Console.WriteLine(item.title);
+            }
+ 
+           
+        }
+
         public void SaveComplaint()
         {
             try
@@ -116,11 +131,10 @@ namespace ConsoleTest
             WebClient client = new WebClient();
             client.Headers["Content-type"] = "application/json";
                 ConsoleTest.Models.complaintItem temp = new ConsoleTest.Models.complaintItem();
-             
                 //temp.complaintId = complaint.complaintId;
                 temp.userId = 1;
-                temp.title = "dadasdsad";
-                temp.details = "dadadadssdad";
+                temp.title = "Rubbish Test";
+                temp.details = "Test Rubbish";
                 temp.numLikes = 2;
                 temp.numComments = 1;
                 temp.picture = "zascac";
@@ -132,15 +146,11 @@ namespace ConsoleTest
                 temp.complaintStatus = "Solved";
                 temp.date = DateTime.Now;
                 temp.isAnonymous = 1;
-
-
-                string path = @"C:\Users\Banka\Desktop\IMG_8051.jpg";
+                string path = @"C:\Users\Banka\Desktop\images.jpg";
                 FileStream fs=new FileStream(path,FileMode.Open);
                 byte[] PhotoBytes = new byte[fs.Length];
                 fs.Read(PhotoBytes, 0, PhotoBytes.Length);
-
                 temp.ImageByte = PhotoBytes;
-               
                 MemoryStream stream = new MemoryStream();
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ConsoleTest.Models.complaintItem));
                 serializer.WriteObject(stream, temp);
@@ -175,10 +185,11 @@ namespace ConsoleTest
         {
             Program test = new Program();
             test.logger.start("Social Cops Service Test Client");
-          
+            test.GetComplaints();
+            test.GetComplaints();
                  //test.GetUsers();
-            test.SaveComplaint();
-
+           // test.SaveComplaint();
+            Console.ReadLine();
         }
     }
 }

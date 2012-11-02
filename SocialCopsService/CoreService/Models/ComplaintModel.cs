@@ -444,5 +444,56 @@ namespace CoreService.Models
             complaintItem copy = (complaintItem)this.MemberwiseClone();
             return copy;
         }
+
+        public static Complaint convertComplaint(complaintItem item)
+        {
+            Complaint temp = new Complaint();
+            temp.userId = item.userId;
+            temp.title = item.title;
+            temp.details = item.details;
+            temp.numLikes = (int)item.numLikes;
+            temp.numComments = (int)item.numComments;
+            temp.picture = item.picture;
+            temp.complaintDate = (DateTime)item.complaintDate;
+            temp.location = item.location;
+            temp.latitude = (float)item.latitude;
+            temp.longitude = (float)item.longitude;
+            temp.category = item.category;
+            temp.complaintStatus = item.complaintStatus;
+            temp.date = item.date;
+            temp.isAnonymous = item.isAnonymous;
+            temp.city = item.city;
+            temp.state = item.state;
+            temp.country = item.country;
+            temp.pincode = item.pincode;
+            return temp;
+        }
+
+        public static complaintItem convertComplaint(Complaint temp)
+        {
+            complaintItem complaint = new complaintItem();
+            complaint.complaintId = temp.complaintId;
+            complaint.userId = temp.userId;
+            complaint.title = temp.title;
+            complaint.details = temp.details;
+            complaint.numLikes = (int)temp.numLikes;
+            complaint.numComments = (int)temp.numComments;
+            complaint.picture = temp.picture;
+            complaint.complaintDate = (DateTime)temp.complaintDate;
+            complaint.location = temp.location;
+            complaint.latitude = (float)temp.latitude;
+            complaint.longitude = (float)temp.longitude;
+            complaint.category = temp.category;
+            complaint.complaintStatus = temp.complaintStatus;
+            complaint.date = temp.date;
+            complaint.isAnonymous = temp.isAnonymous;
+            complaint.city = temp.city;
+            complaint.state = temp.state;
+            complaint.country = temp.country;
+            complaint.pincode = temp.pincode;
+            complaint.thumbImage1 = temp.thumbImage1;
+            complaint.thumbImage2 = temp.thumbImage2;
+            return complaint;
+        }
     }
 }

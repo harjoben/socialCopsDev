@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/CoreService.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CoreService.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="userItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="numComplaints" type="xs:int" />
+      <xs:element minOccurs="0" name="phone" type="xs:int" />
+      <xs:element minOccurs="0" name="phoneUri" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="pincode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="points" type="xs:float" />
+      <xs:element minOccurs="0" name="profilePic" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="pwd" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="state" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userId" type="xs:int" />
+      <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userRank" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="webUri" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="userItem" nillable="true" type="tns:userItem" />
+  <xs:complexType name="complaintItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ImageByte" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="category" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="complaintDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="complaintId" type="xs:int" />
+      <xs:element minOccurs="0" name="complaintStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="details" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="isAnonymous" type="xs:int" />
+      <xs:element minOccurs="0" name="latitude" type="xs:float" />
+      <xs:element minOccurs="0" name="location" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="longitude" type="xs:float" />
+      <xs:element minOccurs="0" name="numComments" type="xs:int" />
+      <xs:element minOccurs="0" name="numLikes" type="xs:int" />
+      <xs:element minOccurs="0" name="picture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="pincode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="state" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="thumbImage1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="thumbImage2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="complaintItem" nillable="true" type="tns:complaintItem" />
+  <xs:complexType name="ArrayOfcomplaintItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="complaintItem" nillable="true" type="tns:complaintItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfcomplaintItem" nillable="true" type="tns:ArrayOfcomplaintItem" />
+  <xs:complexType name="ArrayOfcommentItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="commentItem" nillable="true" type="tns:commentItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfcommentItem" nillable="true" type="tns:ArrayOfcommentItem" />
+  <xs:complexType name="commentItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="complaintId" type="xs:int" />
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="userId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="commentItem" nillable="true" type="tns:commentItem" />
+  <xs:complexType name="ArrayOflikeItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="likeItem" nillable="true" type="tns:likeItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOflikeItem" nillable="true" type="tns:ArrayOflikeItem" />
+  <xs:complexType name="likeItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="complaintId" type="xs:int" />
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="userId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="likeItem" nillable="true" type="tns:likeItem" />
+  <xs:complexType name="ArrayOfspamItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="spamItem" nillable="true" type="tns:spamItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfspamItem" nillable="true" type="tns:ArrayOfspamItem" />
+  <xs:complexType name="spamItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="complaintId" type="xs:int" />
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="userId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="spamItem" nillable="true" type="tns:spamItem" />
+  <xs:complexType name="ArrayOfuserItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="userItem" nillable="true" type="tns:userItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfuserItem" nillable="true" type="tns:ArrayOfuserItem" />
+  <xs:complexType name="subscriptionItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="subscribedToId" type="xs:int" />
+      <xs:element minOccurs="0" name="subscriberId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="subscriptionItem" nillable="true" type="tns:subscriptionItem" />
+  <xs:complexType name="ArrayOfauthorityItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="authorityItem" nillable="true" type="tns:authorityItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfauthorityItem" nillable="true" type="tns:ArrayOfauthorityItem" />
+  <xs:complexType name="authorityItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="authId" type="xs:int" />
+      <xs:element minOccurs="0" name="authName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="flag" type="xs:int" />
+      <xs:element minOccurs="0" name="latitude" type="xs:float" />
+      <xs:element minOccurs="0" name="longitude" type="xs:float" />
+      <xs:element minOccurs="0" name="numPending" type="xs:int" />
+      <xs:element minOccurs="0" name="numResolved" type="xs:int" />
+      <xs:element minOccurs="0" name="phone" type="xs:int" />
+      <xs:element minOccurs="0" name="pincode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="profilePic" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="state" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="website" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="authorityItem" nillable="true" type="tns:authorityItem" />
+  <xs:complexType name="muteAuthorityItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="flag" type="xs:int" />
+      <xs:element minOccurs="0" name="latitude" type="xs:float" />
+      <xs:element minOccurs="0" name="longitude" type="xs:float" />
+      <xs:element minOccurs="0" name="muteAuthAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="muteAuthId" type="xs:int" />
+      <xs:element minOccurs="0" name="muteAuthName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="pic" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="pincode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="state" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="website" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="muteAuthorityItem" nillable="true" type="tns:muteAuthorityItem" />
+  <xs:complexType name="ArrayOfmuteAuthorityItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="muteAuthorityItem" nillable="true" type="tns:muteAuthorityItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfmuteAuthorityItem" nillable="true" type="tns:ArrayOfmuteAuthorityItem" />
+</xs:schema>

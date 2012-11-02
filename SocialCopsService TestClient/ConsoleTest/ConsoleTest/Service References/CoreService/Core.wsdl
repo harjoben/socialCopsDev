@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Core" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://127.0.0.1/Core.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://127.0.0.1/Core.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" />
+      <xsd:import schemaLocation="http://127.0.0.1/Core.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://127.0.0.1/Core.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CoreService.Models" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICore_TestConnection_InputMessage">
+    <wsdl:part name="parameters" element="tns:TestConnection" />
+  </wsdl:message>
+  <wsdl:message name="ICore_TestConnection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TestConnectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_TestConnection_BugFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q1:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveUser" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_ThirdPartyLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:ThirdPartyLogin" />
+  </wsdl:message>
+  <wsdl:message name="ICore_ThirdPartyLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ThirdPartyLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_ThirdPartyLogin_BugFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q2:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveComplaint_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveComplaint" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveComplaint_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveComplaintResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveComplaint_BugFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q3:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaints_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplaints" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaints_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplaintsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaints_BugFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q4:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplaintsById" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplaintsByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsById_BugFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q5:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplaintsByCategory" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplaintsByCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsByCategory_BugFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q6:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsByStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplaintsByStatus" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsByStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplaintsByStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsByStatus_BugFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q7:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplaintsByUserId" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplaintsByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsByUserId_BugFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q8:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsByAuthId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplaintsByAuthId" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsByAuthId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetComplaintsByAuthIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComplaintsByAuthId_BugFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q9:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComments_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetComments" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetComments_BugFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q10:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetCommentsByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommentsByUserId" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetCommentsByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommentsByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetCommentsByUserId_BugFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q11:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetLikes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLikes" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetLikes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLikesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetLikes_BugFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q12:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetLikesByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLikesByUserId" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetLikesByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLikesByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetLikesByUserId_BugFault_FaultMessage">
+    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q13:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveComment_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveComment" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveComment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCommentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveComment_BugFault_FaultMessage">
+    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q14:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveLike_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLike" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveLike_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLikeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveLike_BugFault_FaultMessage">
+    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q15:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetSpam_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSpam" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetSpam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSpamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetSpam_BugFault_FaultMessage">
+    <wsdl:part xmlns:q16="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q16:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetSpamByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSpamByUserId" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetSpamByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSpamByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetSpamByUserId_BugFault_FaultMessage">
+    <wsdl:part xmlns:q17="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q17:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveSpam_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSpam" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveSpam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSpamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveSpam_BugFault_FaultMessage">
+    <wsdl:part xmlns:q18="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q18:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsers" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsers_BugFault_FaultMessage">
+    <wsdl:part xmlns:q19="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q19:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUserById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserById" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUserById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUserById_BugFault_FaultMessage">
+    <wsdl:part xmlns:q20="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q20:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsersByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersByName" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsersByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsersByName_BugFault_FaultMessage">
+    <wsdl:part xmlns:q21="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q21:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUserByEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUserByEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUserByEmail_BugFault_FaultMessage">
+    <wsdl:part xmlns:q22="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q22:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsersByPoints_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersByPoints" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsersByPoints_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersByPointsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsersByPoints_BugFault_FaultMessage">
+    <wsdl:part xmlns:q23="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q23:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsersByRank_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersByRank" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsersByRank_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersByRankResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsersByRank_BugFault_FaultMessage">
+    <wsdl:part xmlns:q24="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q24:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsersByComplaints_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersByComplaints" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsersByComplaints_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersByComplaintsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetUsersByComplaints_BugFault_FaultMessage">
+    <wsdl:part xmlns:q25="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q25:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveSubscription_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSubscription" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveSubscription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSubscriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveSubscription_BugFault_FaultMessage">
+    <wsdl:part xmlns:q26="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q26:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetSubscribers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubscribers" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetSubscribers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubscribersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetSubscribers_BugFault_FaultMessage">
+    <wsdl:part xmlns:q27="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q27:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetSubscribedTo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubscribedTo" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetSubscribedTo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubscribedToResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetSubscribedTo_BugFault_FaultMessage">
+    <wsdl:part xmlns:q28="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q28:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveAuth_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveAuth" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveAuth_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveAuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_SaveAuth_BugFault_FaultMessage">
+    <wsdl:part xmlns:q29="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q29:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuths_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuths" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuths_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuths_BugFault_FaultMessage">
+    <wsdl:part xmlns:q30="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q30:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthById" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthById_BugFault_FaultMessage">
+    <wsdl:part xmlns:q31="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q31:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthsByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthsByName" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthsByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthsByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthsByName_BugFault_FaultMessage">
+    <wsdl:part xmlns:q32="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q32:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthByEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthByEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthByEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthByEmail_BugFault_FaultMessage">
+    <wsdl:part xmlns:q33="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q33:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthsByPending_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthsByPending" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthsByPending_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthsByPendingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthsByPending_BugFault_FaultMessage">
+    <wsdl:part xmlns:q34="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q34:Bug" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthsBySolved_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthsBySolved" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthsBySolved_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthsBySolvedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICore_GetAuthsBySolved_BugFault_FaultMessage">
+    <wsdl:part xmlns:q35="http://schemas.datacontract.org/2004/07/CoreService.Error_Handling" name="detail" element="q35:Bug" />
+  </wsdl:message>
+  <wsdl:portType name="ICore">
+    <wsdl:operation name="TestConnection">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/TestConnection" message="tns:ICore_TestConnection_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/TestConnectionResponse" message="tns:ICore_TestConnection_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/TestConnectionBugFault" name="BugFault" message="tns:ICore_TestConnection_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/SaveUser" message="tns:ICore_SaveUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/SaveUserResponse" message="tns:ICore_SaveUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ThirdPartyLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/ThirdPartyLogin" message="tns:ICore_ThirdPartyLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/ThirdPartyLoginResponse" message="tns:ICore_ThirdPartyLogin_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/ThirdPartyLoginBugFault" name="BugFault" message="tns:ICore_ThirdPartyLogin_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveComplaint">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/SaveComplaint" message="tns:ICore_SaveComplaint_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/SaveComplaintResponse" message="tns:ICore_SaveComplaint_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/SaveComplaintBugFault" name="BugFault" message="tns:ICore_SaveComplaint_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetComplaints">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetComplaints" message="tns:ICore_GetComplaints_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetComplaintsResponse" message="tns:ICore_GetComplaints_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetComplaintsBugFault" name="BugFault" message="tns:ICore_GetComplaints_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetComplaintsById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetComplaintsById" message="tns:ICore_GetComplaintsById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetComplaintsByIdResponse" message="tns:ICore_GetComplaintsById_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetComplaintsByIdBugFault" name="BugFault" message="tns:ICore_GetComplaintsById_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetComplaintsByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetComplaintsByCategory" message="tns:ICore_GetComplaintsByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetComplaintsByCategoryResponse" message="tns:ICore_GetComplaintsByCategory_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetComplaintsByCategoryBugFault" name="BugFault" message="tns:ICore_GetComplaintsByCategory_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetComplaintsByStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetComplaintsByStatus" message="tns:ICore_GetComplaintsByStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetComplaintsByStatusResponse" message="tns:ICore_GetComplaintsByStatus_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetComplaintsByStatusBugFault" name="BugFault" message="tns:ICore_GetComplaintsByStatus_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetComplaintsByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetComplaintsByUserId" message="tns:ICore_GetComplaintsByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetComplaintsByUserIdResponse" message="tns:ICore_GetComplaintsByUserId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetComplaintsByUserIdBugFault" name="BugFault" message="tns:ICore_GetComplaintsByUserId_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetComplaintsByAuthId">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetComplaintsByAuthId" message="tns:ICore_GetComplaintsByAuthId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetComplaintsByAuthIdResponse" message="tns:ICore_GetComplaintsByAuthId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetComplaintsByAuthIdBugFault" name="BugFault" message="tns:ICore_GetComplaintsByAuthId_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetComments">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetComments" message="tns:ICore_GetComments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetCommentsResponse" message="tns:ICore_GetComments_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetCommentsBugFault" name="BugFault" message="tns:ICore_GetComments_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommentsByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetCommentsByUserId" message="tns:ICore_GetCommentsByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetCommentsByUserIdResponse" message="tns:ICore_GetCommentsByUserId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetCommentsByUserIdBugFault" name="BugFault" message="tns:ICore_GetCommentsByUserId_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLikes">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetLikes" message="tns:ICore_GetLikes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetLikesResponse" message="tns:ICore_GetLikes_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetLikesBugFault" name="BugFault" message="tns:ICore_GetLikes_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLikesByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetLikesByUserId" message="tns:ICore_GetLikesByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetLikesByUserIdResponse" message="tns:ICore_GetLikesByUserId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetLikesByUserIdBugFault" name="BugFault" message="tns:ICore_GetLikesByUserId_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveComment">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/SaveComment" message="tns:ICore_SaveComment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/SaveCommentResponse" message="tns:ICore_SaveComment_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/SaveCommentBugFault" name="BugFault" message="tns:ICore_SaveComment_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveLike">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/SaveLike" message="tns:ICore_SaveLike_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/SaveLikeResponse" message="tns:ICore_SaveLike_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/SaveLikeBugFault" name="BugFault" message="tns:ICore_SaveLike_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSpam">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetSpam" message="tns:ICore_GetSpam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetSpamResponse" message="tns:ICore_GetSpam_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetSpamBugFault" name="BugFault" message="tns:ICore_GetSpam_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSpamByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetSpamByUserId" message="tns:ICore_GetSpamByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetSpamByUserIdResponse" message="tns:ICore_GetSpamByUserId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetSpamByUserIdBugFault" name="BugFault" message="tns:ICore_GetSpamByUserId_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveSpam">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/SaveSpam" message="tns:ICore_SaveSpam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/SaveSpamResponse" message="tns:ICore_SaveSpam_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/SaveSpamBugFault" name="BugFault" message="tns:ICore_SaveSpam_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetUsers" message="tns:ICore_GetUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetUsersResponse" message="tns:ICore_GetUsers_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetUsersBugFault" name="BugFault" message="tns:ICore_GetUsers_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetUserById" message="tns:ICore_GetUserById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetUserByIdResponse" message="tns:ICore_GetUserById_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetUserByIdBugFault" name="BugFault" message="tns:ICore_GetUserById_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetUsersByName" message="tns:ICore_GetUsersByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetUsersByNameResponse" message="tns:ICore_GetUsersByName_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetUsersByNameBugFault" name="BugFault" message="tns:ICore_GetUsersByName_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetUserByEmail" message="tns:ICore_GetUserByEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetUserByEmailResponse" message="tns:ICore_GetUserByEmail_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetUserByEmailBugFault" name="BugFault" message="tns:ICore_GetUserByEmail_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersByPoints">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetUsersByPoints" message="tns:ICore_GetUsersByPoints_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetUsersByPointsResponse" message="tns:ICore_GetUsersByPoints_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetUsersByPointsBugFault" name="BugFault" message="tns:ICore_GetUsersByPoints_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersByRank">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetUsersByRank" message="tns:ICore_GetUsersByRank_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetUsersByRankResponse" message="tns:ICore_GetUsersByRank_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetUsersByRankBugFault" name="BugFault" message="tns:ICore_GetUsersByRank_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersByComplaints">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetUsersByComplaints" message="tns:ICore_GetUsersByComplaints_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetUsersByComplaintsResponse" message="tns:ICore_GetUsersByComplaints_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetUsersByComplaintsBugFault" name="BugFault" message="tns:ICore_GetUsersByComplaints_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveSubscription">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/SaveSubscription" message="tns:ICore_SaveSubscription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/SaveSubscriptionResponse" message="tns:ICore_SaveSubscription_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/SaveSubscriptionBugFault" name="BugFault" message="tns:ICore_SaveSubscription_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscribers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetSubscribers" message="tns:ICore_GetSubscribers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetSubscribersResponse" message="tns:ICore_GetSubscribers_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetSubscribersBugFault" name="BugFault" message="tns:ICore_GetSubscribers_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscribedTo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetSubscribedTo" message="tns:ICore_GetSubscribedTo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetSubscribedToResponse" message="tns:ICore_GetSubscribedTo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetSubscribedToBugFault" name="BugFault" message="tns:ICore_GetSubscribedTo_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveAuth">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/SaveAuth" message="tns:ICore_SaveAuth_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/SaveAuthResponse" message="tns:ICore_SaveAuth_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/SaveAuthBugFault" name="BugFault" message="tns:ICore_SaveAuth_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuths">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetAuths" message="tns:ICore_GetAuths_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetAuthsResponse" message="tns:ICore_GetAuths_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetAuthsBugFault" name="BugFault" message="tns:ICore_GetAuths_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetAuthById" message="tns:ICore_GetAuthById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetAuthByIdResponse" message="tns:ICore_GetAuthById_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetAuthByIdBugFault" name="BugFault" message="tns:ICore_GetAuthById_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthsByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetAuthsByName" message="tns:ICore_GetAuthsByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetAuthsByNameResponse" message="tns:ICore_GetAuthsByName_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetAuthsByNameBugFault" name="BugFault" message="tns:ICore_GetAuthsByName_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthByEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetAuthByEmail" message="tns:ICore_GetAuthByEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetAuthByEmailResponse" message="tns:ICore_GetAuthByEmail_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetAuthByEmailBugFault" name="BugFault" message="tns:ICore_GetAuthByEmail_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthsByPending">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetAuthsByPending" message="tns:ICore_GetAuthsByPending_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetAuthsByPendingResponse" message="tns:ICore_GetAuthsByPending_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetAuthsByPendingBugFault" name="BugFault" message="tns:ICore_GetAuthsByPending_BugFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthsBySolved">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICore/GetAuthsBySolved" message="tns:ICore_GetAuthsBySolved_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICore/GetAuthsBySolvedResponse" message="tns:ICore_GetAuthsBySolved_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICore/GetAuthsBySolvedBugFault" name="BugFault" message="tns:ICore_GetAuthsBySolved_BugFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:service name="Core" />
+</wsdl:definitions>

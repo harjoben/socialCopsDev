@@ -13,10 +13,10 @@ namespace CoreService
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class socialcopsentity : DbContext
+    public partial class SocialCopsEntities : DbContext
     {
-        public socialcopsentity()
-            : base("name=socialcopsentity")
+        public SocialCopsEntities()
+            : base("name=SocialCopsEntities")
         {
         }
     
@@ -30,6 +30,8 @@ namespace CoreService
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Jurisdiction> Jurisdictions { get; set; }
         public DbSet<Like> Likes { get; set; }
+        public DbSet<Log> Logs { get; set; }
+        public DbSet<MuteAuthority> MuteAuthorities { get; set; }
         public DbSet<Spam> Spams { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<User> Users { get; set; }
