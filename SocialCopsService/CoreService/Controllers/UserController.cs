@@ -331,10 +331,10 @@ namespace CoreService.Controllers
                 context = new SocialCopsEntities();
                 temp = new userItem();
                 int uid = Convert.ToInt32(id);
-                User user = (User)(from u
+                User user = (from u
                                     in context.Users
                                     where u.userId == uid
-                                    select u);
+                                    select u).ToList()[0];
 
                 if (user == null)
                 {
